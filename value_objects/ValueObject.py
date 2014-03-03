@@ -2,6 +2,8 @@
 from inspect import getargspec
 from itertools import izip
 
+from once import once
+
 # ==============================================================================
 # ValueObject
 # ==============================================================================
@@ -22,13 +24,9 @@ class ValueObject( object ):
   # fields
   # ============================================================================
 
-  @property
+  @once
   def valueObjectFieldValues( self ):
-    try:
-      return self.cachedValueObjectFieldValues
-    except AttributeError:
-      self.cachedValueObjectFieldValues = tuple( getattr( self, name ) for name in self.valueObjectFieldNames )
-      return self.cachedValueObjectFieldValues
+    return tuple( getattr( self, name ) for name in self.valueObjectFieldNames )
 
   @property
   def valueObjectFieldCount( self ):
@@ -65,11 +63,11 @@ class ValueObject( object ):
   # ============================================================================
 
   def __hash__( self ):
-    try:
-      return self.cachedValueObjectHash
-    except AttributeError:
-      self.cachedValueObjectHash = hash( self.valueObjectFieldValues )
-      return self.cachedValueObjectHash
+    return self.valueObjectHash
+
+  @once
+  def valueObjectHash( self ):
+    return hash( self.valueObjectFieldValues )
 
   # ============================================================================
   # equals

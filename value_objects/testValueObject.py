@@ -1,5 +1,5 @@
 
-from ValueObject import ValueObject
+from value_objects import ValueObject.ValueObject
 
 import unittest
 
