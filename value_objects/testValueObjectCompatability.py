@@ -1,12 +1,8 @@
 
-from value_objects import ValueObject.ValueObject
 
 import unittest
 
-# class PathQuery(ValueObject):
-#   def __init__( self, path, query ):
-#     pass
-
+from __init__ import ValueObject
 
 def fixture(init):
     class Option(ValueObject):
