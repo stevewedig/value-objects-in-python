@@ -10,13 +10,14 @@ from once import once
 
 class ValueObject( object ):
 
-  def __new__( klass, *args, **kwargs ):
+  def __new__( klass, *positionalFields, **keywordFields ):
 
     initClass( klass )
 
-    instance = object.__new__( klass, *args, **kwargs )
+    instance = object.__new__( klass, *positionalFields, **keywordFields )
 
-    instance.__dict__.update( dict( zip( klass.valueObjectFieldNames, args ) + kwargs.items() ) )
+    instance.__dict__.update( izip( klass.valueObjectFieldNames, positionalFields ) )
+    instance.__dict__.update( keywordFields )
 
     return instance
 

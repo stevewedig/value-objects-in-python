@@ -3,7 +3,7 @@ from distutils.core import setup
 # http://guide.python-distribute.org/creation.html
 setup( 
     name = 'value_objects',
-    version = '0.1.1',
+    version = '1.0.0',
     author = 'Steve Wedig',
     packages = ['value_objects'],
     url = 'https://github.com/stevewedig/value-objects-in-python/',

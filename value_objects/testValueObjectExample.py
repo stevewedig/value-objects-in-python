@@ -14,7 +14,7 @@ class Path( ValueObject ):
     pass
 
 class Query( ValueObject ):
-  def __init__( self, key__val ):
+  def __init__( self, params ):
     pass
 
 class PathQuery( ValueObject ):
@@ -25,15 +25,13 @@ class PathQuery( ValueObject ):
 # test
 # ============================================================================
 
-LOOK_AT_PRINTING = False
-
 class ValueObjectTestCase( unittest.TestCase ):
 
   def testValueObjectExample( self ):
     # 3 paths
-    path1 = Path( ( 'blog', 'posts' ) )
-    path2 = Path( ( 'blog', 'posts' ) )
-    path3 = Path( ( 'blog', 'comments' ) )
+    path1 = Path( ( 'blog', 'posts' ) )  # positional input
+    path2 = Path( parts = ( 'blog', 'posts' ) )
+    path3 = Path( parts = ( 'blog', 'comments' ) )
 
     # path 1 and 2 are different instances, but have same value
     assert path1 is not path2
@@ -49,12 +47,12 @@ class ValueObjectTestCase( unittest.TestCase ):
     ne( str( path1 ), str( path3 ) )
 
     # 1 query
-    query = Query( frozendict( id = '1' ) );
+    query = Query( frozendict( id = '1' ) )  # positional input
 
     # 3 path queries
-    pathQuery1 = PathQuery( path1, query );
-    pathQuery2 = PathQuery( path2, query );
-    pathQuery3 = PathQuery( path3, query );
+    pathQuery1 = PathQuery( path1, query ) # positional input
+    pathQuery2 = PathQuery( path = path2, query = query )
+    pathQuery3 = PathQuery( path = path3, query = query )
 
     # pathQuery 1 and 2 are different instances, but have same value
     assert pathQuery1 is not pathQuery2
@@ -69,12 +67,14 @@ class ValueObjectTestCase( unittest.TestCase ):
     ne( repr( pathQuery1 ), repr( pathQuery3 ) )
     ne( str( pathQuery1 ), str( pathQuery3 ) )
 
-    # look at printing
-    if LOOK_AT_PRINTING:
-      print "printing value objects..."
-      print path1
-      print query
-      print pathQuery1
-
-      raise Exception( "Check console to see what value object's toString() looks like" )
-
+    # repr
+    eq( repr(path1), "Path{parts=('blog', 'posts')}" )
+    eq( repr(query), "Query{params=frozendict({'id': '1'})}" )
+    eq( repr(pathQuery1), "PathQuery{path=Path{parts=('blog', 'posts')}, query=Query{params=frozendict({'id': '1'})}}" )
+    
+    # str (same as repr when the children have the same str as repr)
+    eq( str(path1), "Path{parts=('blog', 'posts')}" )
+    eq( str(query), "Query{params=frozendict({'id': '1'})}" )
+    eq( str(pathQuery1), "PathQuery{path=Path{parts=('blog', 'posts')}, query=Query{params=frozendict({'id': '1'})}}" )
+    
+    
