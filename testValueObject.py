@@ -40,7 +40,7 @@ class ValueObjectTestCase( unittest.TestCase ):
   def test_init_with_defaults(self):
       Option = fixture(lambda self, short, long='--default': None)
       assert 'self' not in Option('-a').__dict__
-  
+      assert Option('-d').long == '--default'
   
   def test_corner_case_of_self_with_default(self):
       Option = fixture(lambda self='<self>', short='-a': None)

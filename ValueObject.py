@@ -1,28 +1,20 @@
+
 from inspect import getargspec
 from itertools import izip
+
+# ==============================================================================
+# ValueObject
+# ==============================================================================
 
 class ValueObject( object ):
 
   def __new__( klass, *args, **kwargs ):
 
-    init = klass.__init__
-
-    para, varargs, keywords, defaults = getargspec( init )
-    if varargs:
-        raise ValueError( '`*args` are not allowed in __init__' )
-    if keywords:
-        raise ValueError( '`**kwargs` are not allowed in __init__' )
-    if not all( type( p ) is str for p in para ):
-        raise ValueError( 'parameter unpacking is not allowed in __init__' )
-
-    defaults = () if not defaults else defaults
+    initClass( klass )
 
     instance = object.__new__( klass, *args, **kwargs )
 
-    instance.__dict__.update( dict( zip( para[:0:-1], defaults[::-1] ) ) )
-    instance.__dict__.update( dict( zip( para[1:], args ) + kwargs.items() ) )
-
-    instance.__dict__['valueObjectFieldNames'] = tuple( para[1:] )
+    instance.__dict__.update( dict( zip( klass.valueObjectFieldNames, args ) + kwargs.items() ) )
 
     return instance
 
@@ -32,7 +24,11 @@ class ValueObject( object ):
 
   @property
   def valueObjectFieldValues( self ):
-    return tuple( getattr( self, name ) for name in self.valueObjectFieldNames )
+    try:
+      return self.cachedValueObjectFieldValues
+    except AttributeError:
+      self.cachedValueObjectFieldValues = tuple( getattr( self, name ) for name in self.valueObjectFieldNames )
+      return self.cachedValueObjectFieldValues
 
   @property
   def valueObjectFieldCount( self ):
@@ -87,4 +83,39 @@ class ValueObject( object ):
 
   def __ne__( self, other ):
     return not self.__eq__( other )
+
+# ==============================================================================
+# helpers
+# ==============================================================================
+
+def initClass( klass ):
+
+  fieldNames, defaultValues = parseFieldNamesAndDefaultValues( klass.__init__ )
+
+  setattr( klass, 'valueObjectFieldNames', fieldNames )
+
+  # defaultValues implemented as class attributes
+  for name, defaultValue in izip( reversed( fieldNames ), reversed( defaultValues ) ):
+    setattr( klass, name, defaultValue )
+
+def parseFieldNamesAndDefaultValues( init ):
+
+  fieldNames, args, kwargs, defaultValues = getargspec( init )
+
+  # remove self
+  fieldNames = tuple( fieldNames[1:] )
+
+  if args:
+      raise ValueError( 'ValueObject: `*args` are not allowed in __init__' )
+
+  if kwargs:
+      raise ValueError( 'ValueObject: `**kwargs` are not allowed in __init__' )
+
+  if not all( type( name ) is str for name in fieldNames ):
+      raise ValueError( 'ValueObject: parameter unpacking is not allowed in __init__' )
+
+  defaultValues = () if not defaultValues else defaultValues
+
+  return fieldNames, defaultValues
+
 
