@@ -2,6 +2,8 @@
 
 import unittest
 
+from tdd import raises
+
 from __init__ import ValueObject
 
 def fixture(init):
@@ -48,15 +50,14 @@ class ValueObjectTestCase( unittest.TestCase ):
       assert 'self' not in Option('-a').__dict__
 
 
-#   def test_varargs_and_kwargs_are_not_allowed(self):
-#       Option = fixture(lambda self, *args: None)
-#       with self.assertRaises(ValueError):
-#           Option()
-#       Option = fixture(lambda self, **kwargs: None)
-#       with self.assertRaises(ValueError):
-#           Option()
-#    
-#   def test_tuple_parameter_unpacking_is_not_allowed(self):
-#       Option = fixture(lambda self, (one, two): None)
-#       with self.assertRaises(ValueError):
-#           Option()
+  def test_varargs_and_kwargs_are_not_allowed(self):
+      Option = fixture(lambda self, *args: None)
+      raises(ValueError, lambda: Option())
+
+      Option = fixture(lambda self, **kwargs: None)
+      raises(ValueError, lambda: Option())
+    
+  def test_tuple_parameter_unpacking_is_not_allowed(self):
+      Option = fixture(lambda self, (one, two): None)
+      raises(ValueError, lambda: Option())
+
