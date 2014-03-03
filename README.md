@@ -18,7 +18,7 @@ This project follows the standard distribution structure described here: http://
 
 ## Using the Library
 
-The "value_objects" module exports 3 objects: ValueObject, frozendict, and once.
+The "value_objects" package exports 3 objects: ValueObject, frozendict, and once.
 
 ### Pip Install
 
@@ -32,7 +32,7 @@ Alternatively you can just copy the library directory into your own codebase.
 
 ## Other Blog Posts
 
-In addition to this project's blog post ([Immutable Value Objects in Java](http://stevewedig.com)), here are others that may interest you:
+In addition to this project's blog post ([Immutable Value Objects in Java & Python](http://stevewedig.com)), here are others that may interest you:
 
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 * [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
