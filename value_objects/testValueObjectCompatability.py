@@ -2,8 +2,7 @@
 import unittest
 
 from tdd import raises
-
-from __init__ import ValueObject
+from ValueObject import ValueObject
 
 # these tests are ported from halst's Value Object library for Python: 
 # https://github.com/halst/value

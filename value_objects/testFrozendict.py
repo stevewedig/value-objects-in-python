@@ -2,8 +2,7 @@
 import unittest
 
 from tdd import eq, ne, raises
-
-from __init__ import frozendict
+from frozendict import frozendict
 
 class FrozendictTestCase( unittest.TestCase ):
 

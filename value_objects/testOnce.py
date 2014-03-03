@@ -2,8 +2,7 @@
 import unittest
 
 from tdd import eq
-
-from __init__ import once
+from once import once
 
 class OnceTestCase( unittest.TestCase ):
   

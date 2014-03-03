@@ -1,8 +1,8 @@
 
 import unittest
 
-from __init__ import ValueObject, frozendict
-
+from frozendict import frozendict
+from ValueObject import ValueObject
 from tdd import eq, ne
 
 # ============================================================================
