@@ -17,6 +17,8 @@ def raises( Expected, fn, *a, **kw ):
 
 class Did_not_raise( AssertionError ): pass
 
+# ==============================================================================
+
 def eq( x, y ):
   if x != y:
     m = 'eq failed, \n%s\n\n!=\n\n%s' % ( x, y )
@@ -25,6 +27,8 @@ def eq( x, y ):
 def ne( x, y ):
   assert x != y, 'ne( %s, %s ) failed' % ( x, y )
   
+# ==============================================================================
+
 def gt( x, y ):
   assert x > y, 'gt( %s, %s ) failed' % ( x, y )
   
@@ -48,3 +52,4 @@ def not_lt( x, y ):
   
 def not_lte( x, y ):
   assert not ( x <= y ), 'not_lte( %s, %s ) failed' % ( x, y )
+
