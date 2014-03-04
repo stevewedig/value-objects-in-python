@@ -9,7 +9,7 @@ GitHub has a rendered version of this readme: https://github.com/stevewedig/valu
 * Blog post explaining this project: [Immutable Value Objects in Java & Python](http://stevewedig.com)
 * This project is in the public domain via [Unlicense](http://unlicense.org).
 
-Here is an alternative Python implementation of [value objects](https://github.com/halst/value) that makes some slightly different design decisions.
+[Vladimir Keleshev](https://github.com/halst) has an alternative Python library for [value objects](https://github.com/halst/value) that makes some slightly different design decisions.
 
 ## Project Organization
 
