@@ -11,10 +11,12 @@ from once import once
 class ValueObject( object ):
 
   def __new__( klass, *positionalFields, **keywordFields ):
-
+    
+    # Could use a metaclass to do this during class construction instead of 
+    # during instance construction, but I don't want to get into that.
     initClass( klass )
 
-    instance = object.__new__( klass, *positionalFields, **keywordFields )
+    instance = object.__new__( klass )
 
     instance.__dict__.update( izip( klass.valueObjectFieldNames, positionalFields ) )
     instance.__dict__.update( keywordFields )
