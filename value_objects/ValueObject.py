@@ -88,9 +88,18 @@ class ValueObject( object ):
 # ==============================================================================
 
 def initClass( klass ):
+  
+  # only need to init class once
+  # checking .valueObjectClass enables init to happen for subclasses
+  try:
+    if klass == klass.valueObjectClass:
+      return
+  except:
+    pass
 
+  setattr( klass, 'valueObjectClass', klass )
+    
   fieldNames, defaultValues = parseFieldNamesAndDefaultValues( klass.__init__ )
-
   setattr( klass, 'valueObjectFieldNames', fieldNames )
 
   # defaultValues implemented as class attributes
