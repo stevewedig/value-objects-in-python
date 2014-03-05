@@ -1,8 +1,8 @@
 
 import unittest
 
-from tdd import eq, ne, raises
-from frozendict import frozendict
+from .tdd import eq, ne, raises
+from .frozendict import frozendict
 
 class FrozendictTestCase( unittest.TestCase ):
 

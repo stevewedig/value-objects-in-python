@@ -6,11 +6,11 @@
 # from http://code.activestate.com/recipes/414283/
 # https://github.com/slezica/python-frozendict
 
-from once import once
+from .once import once
 
 def blocked( *a, **kw ):
   raise AttributeError( 'A frozendict cannot be modified.' )
- 
+
 class frozendict( dict ):
   '''
   An immutable and hashable dictionary
@@ -21,20 +21,23 @@ class frozendict( dict ):
 
   @once
   def sorted_items( s ):
-    return tuple(
-        sorted(
-          s.iteritems()
-        )
-      )
-  
+    try:
+      items = s.iteritems()
+    except AttributeError:
+      items = s.items()
+
+    return tuple( 
+      sorted( items )
+    )
+
   __delitem__ = blocked
   __setitem__ = blocked
   clear = blocked
   pop = blocked
   popitem = blocked
-  setdefault = blocked 
+  setdefault = blocked
   update = blocked
-  
+
   def __repr__( s ):
     return "frozendict(%s)" % dict.__repr__( s )
-    
+

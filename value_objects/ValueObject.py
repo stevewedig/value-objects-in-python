@@ -1,8 +1,15 @@
 
-from inspect import getargspec
-from itertools import izip
+# https://github.com/nschloe/matplotlib2tikz/issues/20
+try:
+    # Python 2
+    from itertools import izip
+except ImportError:
+    # Python 3
+    izip = zip
 
-from once import once
+from inspect import getargspec
+
+from .once import once
 
 # ==============================================================================
 # ValueObject

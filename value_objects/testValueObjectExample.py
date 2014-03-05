@@ -1,9 +1,9 @@
 
 import unittest
 
-from frozendict import frozendict
-from ValueObject import ValueObject
-from tdd import eq, ne
+from .frozendict import frozendict
+from .ValueObject import ValueObject
+from .tdd import eq, ne
 
 # ============================================================================
 # Path, Query, PathQuery

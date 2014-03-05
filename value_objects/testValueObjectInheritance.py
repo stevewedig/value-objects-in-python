@@ -1,8 +1,8 @@
 
 import unittest
 
-from ValueObject import ValueObject
-from tdd import eq
+from .ValueObject import ValueObject
+from .tdd import eq
 
 # ============================================================================
 # AbsPath <: Path
