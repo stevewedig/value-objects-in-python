@@ -8,15 +8,13 @@
 sudo apt-get update
 
 # install the add-apt-repository command
-# - http://stackoverflow.com/questions/13018626/add-apt-repository-not-found
-sudo apt-get -y install python-software-properties
 sudo apt-get -y install software-properties-common
 which add-apt-repository # verify
 
 # git
 # - use ppa to get a recent version, older versions may not work with Jenkins
 # - http://askubuntu.com/questions/279172/upgrade-git-on-ubuntu-10-04-lucid-lynx
-sudo add-apt-repository ppa:git-core/ppa
+sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt-get update
 sudo apt-get -y install git
 git --version # verify
@@ -28,7 +26,7 @@ sudo apt-get -y install python-pip
 sudo pip install tox
 
 # python versions
-sudo apt-add-repository ppa:fkrull/deadsnakes
+sudo apt-add-repository -y ppa:fkrull/deadsnakes
 sudo apt-get update
 sudo apt-get -y install python2.6
 sudo apt-get -y install python2.7
@@ -40,3 +38,4 @@ git clone https://github.com/stevewedig/value-objects-in-python.git
 cd value-objects-in-python
 sudo tox
 
+	
