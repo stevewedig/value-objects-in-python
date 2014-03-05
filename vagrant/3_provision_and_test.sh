@@ -1,7 +1,5 @@
 
-# http://www.vagrantup.com/
-# after brining up Ubuntu using Vagrant + VirtualBox, you can provision the machine with this script
-# so that Python 2.6, 2.7, 3.1, 3.2, and 3.3 can be tested via Tox
+# requirements: you are inside a the fresh ubuntu virtual machine
 
 # update package list
 # - http://askubuntu.com/questions/222348/what-does-sudo-apt-get-update-do
@@ -23,12 +21,6 @@ sudo apt-get update
 sudo apt-get -y install git
 git --version # verify
 
-# pip
-sudo apt-get -y install python-pip
-	
-# tox
-sudo pip install tox
-
 # python versions
 sudo apt-add-repository -y ppa:fkrull/deadsnakes
 sudo apt-get update
@@ -37,7 +29,13 @@ sudo apt-get -y install python2.7
 sudo apt-get -y install python3.2
 sudo apt-get -y install python3.3
 
-# checkout code and run tests via Tox
+# pip
+sudo apt-get -y install python-pip
+	
+# tox
+sudo pip install tox
+
+# checkout code and run tests via tox
 # - tox apparently does something requiring sudo
 git clone https://github.com/stevewedig/value-objects-in-python.git
 cd value-objects-in-python

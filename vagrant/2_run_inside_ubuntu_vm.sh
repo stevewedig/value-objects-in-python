@@ -7,3 +7,7 @@ wget --no-check-certificate https://raw.github.com/stevewedig/value-objects-in-p
 chmod +x 3_provision_and_test.sh
 ./3_provision_and_test.sh
 
+# next steps...
+# - "vagrant exit" to exit ubuntu vm
+# - "vagrant destroy" to halt and delete the vm
+
