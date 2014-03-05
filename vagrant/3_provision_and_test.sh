@@ -9,6 +9,7 @@ sudo apt-get update
 
 # install the add-apt-repository command
 sudo apt-get -y install software-properties-common
+sudo apt-get -y install python-software-properties
 which add-apt-repository # verify
 
 # git
