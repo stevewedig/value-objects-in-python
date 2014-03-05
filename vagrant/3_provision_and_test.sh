@@ -12,6 +12,9 @@ sudo apt-get -y install software-properties-common
 sudo apt-get -y install python-software-properties
 which add-apt-repository # verify
 
+# optionally install a text editor
+# sudo apt-get -y install emacs vim
+
 # git
 # - use ppa to get a recent version, older versions may not work with Jenkins
 # - http://askubuntu.com/questions/279172/upgrade-git-on-ubuntu-10-04-lucid-lynx
@@ -35,8 +38,8 @@ sudo apt-get -y install python3.2
 sudo apt-get -y install python3.3
 
 # checkout code and run tests via Tox
+# - tox apparently does something requiring sudo
 git clone https://github.com/stevewedig/value-objects-in-python.git
 cd value-objects-in-python
 sudo tox
 
-	
