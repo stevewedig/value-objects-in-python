@@ -15,8 +15,8 @@ GitHub has a rendered version of this readme: https://github.com/stevewedig/valu
 
 This project follows the standard distribution structure described here: http://guide.python-distribute.org/creation.html
 
-* **Code Directory**: value_objects/
-* **Test file with an example**: value_objects/testValueObjectExample.py
+* **Code Directory**: [value_objects/](https://github.com/stevewedig/value-objects-in-python/tree/master/value_objects)
+* **Test file with an example**: [value_objects/testValueObjectExample.py](https://github.com/stevewedig/value-objects-in-python/blob/master/value_objects/testValueObjectExample.py)
 
 ## Using the Library
 
