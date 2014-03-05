@@ -1,7 +1,4 @@
 
-
-# 
-
 # http://www.vagrantup.com/
 # after brining up Ubuntu using Vagrant + VirtualBox, you can provision the machine with this script
 # so that Python 2.6, 2.7, 3.1, 3.2, and 3.3 can be tested via Tox

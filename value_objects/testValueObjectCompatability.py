@@ -58,4 +58,3 @@ class ValueObjectTestCase( unittest.TestCase ):
 #       Option = fixture(lambda self, (one, two): None)
 #       raises(ValueError, lambda: Option())
 
-
