@@ -1,4 +1,6 @@
 
+# requirements: you are inside the fresh ubuntu virtual machine
+
 # download provision script from GitHub
 # - wget is built into the Ubuntu VM. Git is not.
 wget --no-check-certificate https://raw.github.com/stevewedig/value-objects-in-python/master/vagrant/3_provision_and_test.sh

@@ -1,6 +1,4 @@
 
-# requirements: you are inside a the fresh ubuntu virtual machine
-
 # update package list
 # - http://askubuntu.com/questions/222348/what-does-sudo-apt-get-update-do
 sudo apt-get update
