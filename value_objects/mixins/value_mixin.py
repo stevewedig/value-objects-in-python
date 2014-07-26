@@ -32,19 +32,14 @@ class ValueMixin( ObjectMixin ):
   # ====================================
 
   @once
-  def fieldValues( self ):
-    return tuple( getattr( self, name ) for name in self.fieldNames )
-
-  @property
-  def fieldPairs( self ):
-    return izip( self.fieldNames, self.fieldValues )
-
-  @once
   def object_helper( self ):
+    
+    field_values = tuple( getattr( self, name ) for name in self.fieldNames )
+    
     return ObjectHelper(
       object_class = type( self ), 
       field_names = self.fieldNames, 
-      field_values = self.fieldValues,
+      field_values = field_values,
     )
 
   # ====================================

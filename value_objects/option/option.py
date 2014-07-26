@@ -1,8 +1,8 @@
 
 from value_objects.util.decorate import wraps
-from value_objects.mixins.object_mixin import ObjectMixin
+from value_objects.mixins.value_mixin import ValueMixin
 
-class Option( ObjectMixin ):
+class Option( ValueMixin ):
 
   class OptionCannotWrapNone( Exception ): pass
 
@@ -13,27 +13,28 @@ class Option( ObjectMixin ):
 
   # ====================================
 
-  def __init__( s, item ):
-    s._validate( item )
-    s._item = item
-
-  def _validate( s, item ):
-
-    if item is None and absent_has_been_created:
+  def __init__( s, _item ):
+    
+    if s._item is None and absent_has_been_created:
       raise s.OptionCannotWrapNone()
 
-    if isinstance( item, Option ):
-      if item is Option.absent:
+    if isinstance( s._item, Option ):
+      if s._item is Option.absent:
         raise s.OptionCannotWrapAbsent()
       else:
         raise s.OptionCannotWrapOption()
 
-  
   # ====================================
 
   def __unicode__( s ):
     if s.is_present:
       return 'Option( %s )' % s._item
+    else:
+      return 'Option.absent'
+
+  def __repr__( s ):
+    if s.is_present:
+      return 'Option( %s )' % repr( s._item )
     else:
       return 'Option.absent'
 
@@ -102,5 +103,7 @@ class Option( ObjectMixin ):
 # ==============================================================================
 
 absent_has_been_created = False
-Option.absent = Option( None )
+
+Option.absent = Option( None ) # singleton
+
 absent_has_been_created = True
