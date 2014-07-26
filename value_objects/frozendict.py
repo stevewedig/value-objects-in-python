@@ -6,7 +6,7 @@
 # from http://code.activestate.com/recipes/414283/
 # https://github.com/slezica/python-frozendict
 
-from value_objects.util.once import once
+from once import once
 
 def blocked( *a, **kw ):
   raise AttributeError( 'A frozendict cannot be modified.' )

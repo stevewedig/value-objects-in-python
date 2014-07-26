@@ -1,8 +1,8 @@
 
 import unittest
 
-from value_objects.util.tdd import eq, ne, raises
-from value_objects.util.option import Option, nothing
+from tdd import eq, ne, raises
+from value_objects import Option
 
 # ==============================================================================
 # ==============================================================================
@@ -12,13 +12,13 @@ class OptionTestCase( unittest.TestCase ):
   
   def test_nothing( self ):
     
-    assert not nothing.exists
+    assert not Option.absent.exists
     
-    ne( nothing, None )
+    ne( Option.absent, None )
     
     raises(
       Option.Tried_to_access_nothing,
-      lambda: nothing.option
+      lambda: Option.absent.option
     )
     
   # ==============================================================================
@@ -44,19 +44,19 @@ class OptionTestCase( unittest.TestCase ):
   
     eq( five, Option( 5 ) )
     
-    ne( five, nothing )
+    ne( five, Option.absent )
   
   # ==============================================================================
   # ==============================================================================
   
   def test_nothing_2( self ):
-    assert not nothing.exists
+    assert not Option.absent.exists
     
-    assert nothing != None
+    assert Option.absent != None
    
     raises(
       Option.Tried_to_access_nothing,
-      lambda: nothing.option
+      lambda: Option.absent.option
     )
     
   # ==============================================================================
@@ -72,7 +72,7 @@ class OptionTestCase( unittest.TestCase ):
     
     assert Option( 5 ) == Option( 5 )
   
-    assert five != nothing
+    assert five != Option.absent
   
   # ==============================================================================
   # ==============================================================================
@@ -87,7 +87,7 @@ class OptionTestCase( unittest.TestCase ):
     raises(
       Option.Option_cannot_wrap_nothing,
       Option,
-      nothing
+      Option.absent
     )
       
     raises(
@@ -101,8 +101,8 @@ class OptionTestCase( unittest.TestCase ):
   
   def test_wrap( self ):
     eq(
-      nothing,
-      Option.wrap( nothing ),
+      Option.absent,
+      Option.wrap( Option.absent ),
     )
   
     eq(
@@ -111,7 +111,7 @@ class OptionTestCase( unittest.TestCase ):
     )
     
     eq(
-      nothing,
+      Option.absent,
       Option.wrap( None ),
     )
     
@@ -129,7 +129,7 @@ class OptionTestCase( unittest.TestCase ):
     def fn( x ):
       return x
   
-    eq( nothing, fn( None ) )
+    eq( Option.absent, fn( None ) )
     eq( Option( 5 ), fn( 5 ) )
     
   
@@ -142,6 +142,6 @@ class OptionTestCase( unittest.TestCase ):
     
     person = Person()
     
-    eq( nothing, person.method( None ) )
+    eq( Option.absent, person.method( None ) )
     eq( Option( 5 ), person.method( 5 ) )
 

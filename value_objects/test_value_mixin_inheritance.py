@@ -1,7 +1,7 @@
 
 import unittest
 
-from value_objects.util.tdd import eq
+from value_objects.tdd import eq
 from value_objects import ValueMixin
 
 # ============================================================================

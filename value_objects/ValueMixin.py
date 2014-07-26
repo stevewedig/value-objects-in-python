@@ -9,7 +9,7 @@ except ImportError:
 
 from inspect import getargspec
 
-from value_objects.util.once import once
+from once import once
 
 # ==============================================================================
 # ValueMixin

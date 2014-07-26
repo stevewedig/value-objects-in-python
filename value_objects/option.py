@@ -1,5 +1,8 @@
 
-from value_objects.util.decorate import wraps
+from decorate import wraps
+
+# ==============================================================================
+# ==============================================================================
 
 class Option( object ):
   
@@ -10,7 +13,8 @@ class Option( object ):
   
   class Tried_to_access_nothing( Exception ): pass
   
-  # ------------------------------------
+  
+  # ============================================================================
 
   def __init__( s, inner ):
     s._validate( inner )
@@ -31,15 +35,15 @@ class Option( object ):
       else:
         raise s.Option_cannot_wrap_option()
 
-  # ------------------------------------
+  # ============================================================================
 
   def __str__( s ):
     if s.exists:
       return 'Option( %s )' % s._inner
     else:
       return 'nothing'
-
-  # ------------------------------------
+      
+  # ============================================================================
 
   def __hash__( s ):
     return hash( s._inner )
@@ -53,7 +57,7 @@ class Option( object ):
   def __ne__( s, other ):
     return not s.__eq__( other )
 
-  # ------------------------------------
+  # ============================================================================
   
   @property
   def option( s ):
@@ -62,13 +66,13 @@ class Option( object ):
     else:
       raise s.Tried_to_access_nothing()
 
-  # ------------------------------------
+  # ============================================================================
     
   @property
   def exists( s ):
     return s._inner is not None
 
-  # ------------------------------------
+  # ============================================================================
 
   def option_default( s, default ):
     if s.exists:
@@ -76,7 +80,7 @@ class Option( object ):
     else:
       return default
 
-  # ------------------------------------
+  # ============================================================================
 
   @classmethod
   def wrap( s, x ):
@@ -87,7 +91,7 @@ class Option( object ):
     else:
       return Option( x )
     
-  # ------------------------------------
+  # ============================================================================
   
   @classmethod
   def wrapper( s, inner ):
@@ -102,3 +106,6 @@ class Option( object ):
 # ------------------------------------------------------------------------------
 
 nothing = Option( None )
+
+Option.absent = nothing
+

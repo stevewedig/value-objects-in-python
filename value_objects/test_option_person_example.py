@@ -1,13 +1,12 @@
 
 import unittest
 
-from value_objects.util.tdd import eq, ne, raises
-from value_objects.util.once import once
-from value_objects.util.option import Option, nothing
+from tdd import eq, ne, raises
+from value_objects import once, Option
+
 
 # ==============================================================================
 # ==============================================================================
-
 class Person( object ):
   def __init__(
     s,
@@ -26,7 +25,7 @@ class Person( object ):
   @once
   def middle_name( s ):
     if s._middle_name is None:
-      return nothing
+      return Option.absent
     else:
       return Option( s._middle_name ) 
   

@@ -1,8 +1,8 @@
 
 import unittest
 
-from value_objects.util.tdd import eq
-from value_objects.util.once import once
+from tdd import eq
+from value_objects import once
 
 class OnceTestCase( unittest.TestCase ):
 

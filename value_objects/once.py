@@ -1,5 +1,5 @@
 
-from value_objects.util.decorate import wraps
+from value_objects.decorate import wraps
 
 # http://stevewedig.com/2014/01/27/a-few-python-tricks/
 

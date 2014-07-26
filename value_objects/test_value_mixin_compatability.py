@@ -1,7 +1,7 @@
 
 import unittest
 
-from value_objects.util.tdd import raises
+from value_objects.tdd import raises
 from value_objects import ValueMixin
 
 # these tests are ported from halst's Value Object library for Python: 

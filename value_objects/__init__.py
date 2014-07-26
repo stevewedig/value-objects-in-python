@@ -1,8 +1,8 @@
 
-__all__ = 'ValueMixin, frozendict, once, option'
+__all__ = 'ValueMixin, frozendict, once, Option'
 
-from value_objects.util.frozendict import frozendict
-from value_objects.util.once import once
-from value_objects.util.option import Option, nothing
-from value_objects.mixin.ValueMixin import ValueMixin
+from frozendict import frozendict
+from once import once
+from option import Option
+from ValueMixin import ValueMixin
 
