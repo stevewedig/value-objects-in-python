@@ -15,7 +15,7 @@ This library provides helpers for implementing value objects in Python. The libr
 
 ### Installation via Pip
 
-The easiest way to use this library is to use [Pip](http://en.wikipedia.org/wiki/Pip_(package_manager)):
+The easiest way to install this library is to use [Pip](http://en.wikipedia.org/wiki/Pip_(package_manager)):
 
     pip install value_objects
 
