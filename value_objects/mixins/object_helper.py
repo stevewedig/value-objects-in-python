@@ -2,6 +2,10 @@
 from value_objects.util.zip import izip
 from value_objects.util.once import once
 
+try:
+  unicode
+except NameError:
+  unicode = str
 
 class ObjectHelper( object ):
   
