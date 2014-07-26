@@ -26,7 +26,7 @@ class Child( Parent ):
 
 
 # ============================================================================
-# make sure inheritance works
+# make sure inheritance works (not that I really ever use it)
 # ============================================================================
 
 class TestValueMixinInheritance( unittest.TestCase ):
