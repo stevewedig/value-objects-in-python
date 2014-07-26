@@ -13,11 +13,11 @@ class ObjectMixin( object ):
 
     # Could use a metaclass to do this during class construction instead of
     # during instance construction, but I don't want to get into that.
-    initClass( klass )
+    initialize_class( klass )
 
     instance = object.__new__( klass )
 
-    instance.__dict__.update( izip( klass.fieldNames, positionalFields ) )
+    instance.__dict__.update( izip( klass.field_names, positionalFields ) )
     instance.__dict__.update( keywordFields )
 
     return instance
@@ -43,11 +43,11 @@ class ObjectMixin( object ):
   @property
   def uncached_object_helper( self ):
 
-    field_values = tuple( getattr( self, name ) for name in self.fieldNames )
+    field_values = tuple( getattr( self, name ) for name in self.field_names )
 
     return ObjectHelper( 
       object_class = type( self ),
-      field_names = self.fieldNames,
+      field_names = self.field_names,
       field_values = field_values,
     )
 
@@ -71,31 +71,31 @@ class ObjectMixin( object ):
 # helpers
 # ==============================================================================
 
-def initClass( klass ):
+def initialize_class( klass ):
 
-  # only need to init class once
-  # checking .valueObjectClass enables init to happen for subclasses
+  # only need to the initialize_class once
+  # checking .class_that_was_initialzed enables init to happen for subclasses
   try:
-    if klass == klass.valueObjectClass:
+    if klass == klass.class_that_was_initialzed:
       return
   except:
     pass
 
-  setattr( klass, 'valueObjectClass', klass )
+  klass.class_that_was_initialzed = klass
 
-  fieldNames, defaultValues = parseFieldNamesAndDefaultValues( klass.__init__ )
-  setattr( klass, 'fieldNames', fieldNames )
+  field_names, default_values = parse_fields( klass.__init__ )
+  klass.field_names = field_names
 
-  # defaultValues implemented as class attributes
-  for name, defaultValue in izip( reversed( fieldNames ), reversed( defaultValues ) ):
-    setattr( klass, name, defaultValue )
+  # default_values implemented as class attributes
+  for name, default_value in izip( reversed( field_names ), reversed( default_values ) ):
+    setattr( klass, name, default_value )
 
-def parseFieldNamesAndDefaultValues( init ):
+def parse_fields( init ):
 
-  fieldNames, args, kwargs, defaultValues = getargspec( init )
+  field_names, args, kwargs, default_values = getargspec( init )
 
   # remove self
-  fieldNames = tuple( fieldNames[1:] )
+  field_names = tuple( field_names[1:] )
 
   if args:
       raise ValueError( '`*args` are not allowed in __init__' )
@@ -103,9 +103,10 @@ def parseFieldNamesAndDefaultValues( init ):
   if kwargs:
       raise ValueError( '`**kwargs` are not allowed in __init__' )
 
-  if not all( type( name ) is str for name in fieldNames ):
+  if not all( type( name ) is str for name in field_names ):
       raise ValueError( 'parameter unpacking is not allowed in __init__' )
 
-  defaultValues = () if not defaultValues else defaultValues
+  default_values = () if not default_values else default_values
 
-  return fieldNames, defaultValues
+  return field_names, default_values
+
