@@ -39,9 +39,14 @@ class OptTestCase( unittest.TestCase ):
 
     raises( 
       Opt.OptWasAbsent,
-      lambda: Opt.absent.Opt
+      lambda: Opt.absent.opt
     )
 
+    eq(
+      6,
+      Opt.absent.opt_default( 6 )
+    )
+  
   # ====================================
 
   def test_present( self ):
@@ -53,7 +58,12 @@ class OptTestCase( unittest.TestCase ):
 
     eq( 
       5,
-      five.Opt
+      five.opt
+    )
+
+    eq( 
+      5,
+      five.opt_default( 6 )
     )
 
     eq( five, Opt( 5 ) )

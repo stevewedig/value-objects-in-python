@@ -45,10 +45,10 @@ class OptTestCase( unittest.TestCase ):
     )
   
     assert steve.middle_name.is_present
-    eq( 'Michael', steve.middle_name.Opt )
+    eq( 'Michael', steve.middle_name.opt )
     
     assert steve.social_security.is_present
-    eq( 1234, steve.social_security.Opt )
+    eq( 1234, steve.social_security.opt )
     
     dan = Person(
       first_name = 'Dan',

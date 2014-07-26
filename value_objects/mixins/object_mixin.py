@@ -56,12 +56,12 @@ class ObjectMixin( object ):
   # ====================================
 
   # http://stackoverflow.com/questions/1307014/python-str-versus-unicode
-  if sys.version_info[0] >= 3: # Python 3
-      def __str__(self):
+  if sys.version_info[0] >= 3:  # Python 3
+      def __str__( self ):
           return self.__unicode__()
   else:  # Python 2
-      def __str__(self):
-          return self.__unicode__().encode('utf8')
+      def __str__( self ):
+          return self.__unicode__().encode( 'utf8' )
 
   def __repr__( self ):
     return self.object_helper.class_and_state_repr
@@ -79,6 +79,7 @@ def initialize_class( klass ):
 
   # only need to the initialize_class once
   # checking .class_that_was_initialzed enables initialize_class to happen for subclasses
+  # (see test_value_mixin_inheritance.py)
   try:
     if klass == klass.class_that_was_initialzed:
       return

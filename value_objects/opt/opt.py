@@ -13,76 +13,62 @@ class Opt( ValueMixin ):
 
   # ====================================
 
-  def __init__( s, _item ):
+  def __init__( self, _item ):
     
-    if s._item is None and absent_has_been_created:
-      raise s.OptCannotWrapNone()
+    if self._item is None and absent_has_been_created:
+      raise self.OptCannotWrapNone()
 
-    if isinstance( s._item, Opt ):
-      if s._item is Opt.absent:
-        raise s.OptCannotWrapAbsent()
+    if isinstance( self._item, Opt ):
+      if self._item is Opt.absent:
+        raise self.OptCannotWrapAbsent()
       else:
-        raise s.OptCannotWrapOpt()
+        raise self.OptCannotWrapOpt()
 
   # ====================================
 
-  def __unicode__( s ):
-    if s.is_present:
-      return 'Opt( %s )' % s._item
+  def __unicode__( self ):
+    if self.is_present:
+      return 'Opt( %s )' % self._item
     else:
       return 'Opt.absent'
 
-  def __repr__( s ):
-    if s.is_present:
-      return 'Opt( %s )' % repr( s._item )
+  def __repr__( self ):
+    if self.is_present:
+      return 'Opt( %s )' % repr( self._item )
     else:
       return 'Opt.absent'
 
   # ====================================
 
-  def __hash__( s ):
-    return hash( s._item )
+  @property
+  def is_present( self ):
+    return not self.is_absent
 
-  def __eq__( s, other ):
-    if not isinstance( other, Opt ):
-      return False
-
-    return s._item == other._item
-
-  def __ne__( s, other ):
-    return not s.__eq__( other )
+  @property
+  def is_absent( self ):
+    return self._item is None
 
   # ====================================
 
   @property
-  def is_present( s ):
-    return not s.is_absent
-
-  @property
-  def is_absent( s ):
-    return s._item is None
-
-  # ====================================
-
-  @property
-  def Opt( s ):
-    if s.is_present:
-      return s._item
+  def opt( self ):
+    if self.is_present:
+      return self._item
     else:
-      raise s.OptWasAbsent()
+      raise self.OptWasAbsent()
 
   # ====================================
 
-  def Opt_default( s, default ):
-    if s.is_present:
-      return s.Opt
+  def opt_default( self, default ):
+    if self.is_present:
+      return self.opt
     else:
       return default
 
   # ====================================
 
   @classmethod
-  def adapt( s, x ):
+  def adapt( self, x ):
     if isinstance( x, Opt ):
       return x
     elif x is None:
@@ -91,7 +77,7 @@ class Opt( ValueMixin ):
       return Opt( x )
 
   @classmethod
-  def adapter( s, fn ):
+  def adapter( self, fn ):
 
     @wraps( fn )
     def outer( *a, **kw ):
