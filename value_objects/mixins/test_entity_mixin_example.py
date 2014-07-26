@@ -20,8 +20,8 @@ class EntityMixinTestCase( unittest.TestCase ):
 
   def testEntityMixinExample( self ):
     
-    bob1 = Person( name = u'bob', age = 40 )
-    bob2 = Person( name = u'bob', age = 40 )
+    bob1 = Person( name = 'bob', age = 40 )
+    bob2 = Person( name = 'bob', age = 40 )
     
     # double check that we have different values but they print the same
     assert_unequal_objects_but_equal_strings( bob1, bob2 )
