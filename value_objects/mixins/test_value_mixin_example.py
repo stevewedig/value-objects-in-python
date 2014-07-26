@@ -1,7 +1,7 @@
 
 import unittest
 
-from value_objects import ValueMixin, Option
+from value_objects import ValueMixin, Opt
 from value_objects.util.testing import assert_equal_objects_and_strings, assert_unequal_objects_and_strings
 
 # ============================================================================
@@ -9,11 +9,11 @@ from value_objects.util.testing import assert_equal_objects_and_strings, assert_
 # ============================================================================
 
 class Image( ValueMixin ):
-  def __init__( self, url, height = Option.absent, width = Option.absent ):
+  def __init__( self, url, height = Opt.absent, width = Opt.absent ):
     pass
 
 class Article( ValueMixin ):
-  def __init__( self, url, title, image = Option.absent ):
+  def __init__( self, url, title, image = Opt.absent ):
     pass
 
 class Feed( ValueMixin ):
@@ -29,19 +29,19 @@ class ValueMixinTestCase( unittest.TestCase ):
   def testValueMixinExample( self ):
 
     # same images
-    image1 = Image( "http://image.com", Option( 20 ), Option( 30 ) )
-    image2 = Image( "http://image.com", Option( 20 ), Option( 30 ) )
+    image1 = Image( "http://image.com", Opt( 20 ), Opt( 30 ) )
+    image2 = Image( "http://image.com", Opt( 20 ), Opt( 30 ) )
     assert_equal_objects_and_strings( image1, image2 )
 
     # image with different url
-    assert_unequal_objects_and_strings( image1, Image( u"http://xxx.com", Option( 20 ), Option( 30 ) ) )
+    assert_unequal_objects_and_strings( image1, Image( u"http://xxx.com", Opt( 20 ), Opt( 30 ) ) )
 
     # image without size
     assert_unequal_objects_and_strings( image1, Image( u"http://image.com" ) )
 
     # same articles
-    article1 = Article( u"http://article.com", u"My Article", Option( image1 ) )
-    article2 = Article( u"http://article.com", u"My Article", Option( image2 ) )
+    article1 = Article( u"http://article.com", u"My Article", Opt( image1 ) )
+    article2 = Article( u"http://article.com", u"My Article", Opt( image2 ) )
     assert_equal_objects_and_strings( article1, article2 )
 
     # article with different url

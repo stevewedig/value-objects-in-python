@@ -14,7 +14,7 @@ __all__ = [
   'EntityMixin',
   
   # option
-  'Option',
+  'Opt',
 ] 
 
 # util
@@ -29,4 +29,4 @@ from value_objects.mixins.value_mixin import ValueMixin
 from value_objects.mixins.entity_mixin import EntityMixin
 
 # option
-from value_objects.option.option import Option
+from value_objects.opt.opt import Opt

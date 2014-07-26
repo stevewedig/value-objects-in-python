@@ -1,7 +1,7 @@
 
 import unittest
 
-from value_objects import once, Option
+from value_objects import once, Opt
 from value_objects.util.testing import eq
 
 class Person( object ):
@@ -22,19 +22,19 @@ class Person( object ):
   @once
   def middle_name( s ):
     if s._middle_name is None:
-      return Option.absent
+      return Opt.absent
     else:
-      return Option( s._middle_name ) 
+      return Opt( s._middle_name ) 
   
   # decorator
   @once
-  @Option.adapter
+  @Opt.adapter
   def social_security( s ):
     return s._social_security
     
 # ==============================================================================
 
-class OptionTestCase( unittest.TestCase ):
+class OptTestCase( unittest.TestCase ):
   
   def test_person_example( self ):
     steve = Person(
@@ -45,10 +45,10 @@ class OptionTestCase( unittest.TestCase ):
     )
   
     assert steve.middle_name.is_present
-    eq( 'Michael', steve.middle_name.option )
+    eq( 'Michael', steve.middle_name.Opt )
     
     assert steve.social_security.is_present
-    eq( 1234, steve.social_security.option )
+    eq( 1234, steve.social_security.Opt )
     
     dan = Person(
       first_name = 'Dan',

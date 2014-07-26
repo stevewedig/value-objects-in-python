@@ -2,41 +2,41 @@
 from value_objects.util.decorate import wraps
 from value_objects.mixins.value_mixin import ValueMixin
 
-class Option( ValueMixin ):
+class Opt( ValueMixin ):
 
-  class OptionCannotWrapNone( Exception ): pass
+  class OptCannotWrapNone( Exception ): pass
 
-  class OptionCannotWrapOption( Exception ): pass
-  class OptionCannotWrapAbsent( OptionCannotWrapOption ): pass
+  class OptCannotWrapOpt( Exception ): pass
+  class OptCannotWrapAbsent( OptCannotWrapOpt ): pass
 
-  class OptionWasAbsent( Exception ): pass
+  class OptWasAbsent( Exception ): pass
 
   # ====================================
 
   def __init__( s, _item ):
     
     if s._item is None and absent_has_been_created:
-      raise s.OptionCannotWrapNone()
+      raise s.OptCannotWrapNone()
 
-    if isinstance( s._item, Option ):
-      if s._item is Option.absent:
-        raise s.OptionCannotWrapAbsent()
+    if isinstance( s._item, Opt ):
+      if s._item is Opt.absent:
+        raise s.OptCannotWrapAbsent()
       else:
-        raise s.OptionCannotWrapOption()
+        raise s.OptCannotWrapOpt()
 
   # ====================================
 
   def __unicode__( s ):
     if s.is_present:
-      return 'Option( %s )' % s._item
+      return 'Opt( %s )' % s._item
     else:
-      return 'Option.absent'
+      return 'Opt.absent'
 
   def __repr__( s ):
     if s.is_present:
-      return 'Option( %s )' % repr( s._item )
+      return 'Opt( %s )' % repr( s._item )
     else:
-      return 'Option.absent'
+      return 'Opt.absent'
 
   # ====================================
 
@@ -44,7 +44,7 @@ class Option( ValueMixin ):
     return hash( s._item )
 
   def __eq__( s, other ):
-    if not isinstance( other, Option ):
+    if not isinstance( other, Opt ):
       return False
 
     return s._item == other._item
@@ -65,17 +65,17 @@ class Option( ValueMixin ):
   # ====================================
 
   @property
-  def option( s ):
+  def Opt( s ):
     if s.is_present:
       return s._item
     else:
-      raise s.OptionWasAbsent()
+      raise s.OptWasAbsent()
 
   # ====================================
 
-  def option_default( s, default ):
+  def Opt_default( s, default ):
     if s.is_present:
-      return s.option
+      return s.Opt
     else:
       return default
 
@@ -83,12 +83,12 @@ class Option( ValueMixin ):
 
   @classmethod
   def adapt( s, x ):
-    if isinstance( x, Option ):
+    if isinstance( x, Opt ):
       return x
     elif x is None:
-      return Option.absent
+      return Opt.absent
     else:
-      return Option( x )
+      return Opt( x )
 
   @classmethod
   def adapter( s, fn ):
@@ -96,7 +96,7 @@ class Option( ValueMixin ):
     @wraps( fn )
     def outer( *a, **kw ):
       output = fn( *a, **kw )
-      return Option.adapt( output )
+      return Opt.adapt( output )
 
     return outer
 
@@ -104,6 +104,6 @@ class Option( ValueMixin ):
 
 absent_has_been_created = False
 
-Option.absent = Option( None ) # singleton
+Opt.absent = Opt( None ) # singleton
 
 absent_has_been_created = True
