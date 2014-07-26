@@ -1,5 +1,5 @@
 
-from object_mixin import ObjectMixin
+from value_objects.mixins.object_mixin import ObjectMixin
 
 class ValueMixin( ObjectMixin ):
 

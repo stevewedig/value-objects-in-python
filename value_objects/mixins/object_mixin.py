@@ -2,8 +2,7 @@
 from inspect import getargspec
 
 from value_objects.util.zip import izip
-
-from object_helper import ObjectHelper
+from value_objects.mixins.object_helper import ObjectHelper
 
 # ==============================================================================
 
