@@ -8,7 +8,7 @@ except ImportError:
     izip = zip
     
 try:
-  unicode
+  unicode = unicode
 except NameError:
   unicode = str
 
