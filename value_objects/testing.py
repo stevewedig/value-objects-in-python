@@ -57,28 +57,21 @@ def not_lte( x, y ):
 
 def assert_equal_objects_and_strings( a, b ):
 
-  assert a is not b, u"expecting different instances: %s is %s" % ( a, b )
+  eq( a, b )
+  eq( hash( a ), hash( b ) )
 
-  assert a == b, u"objects were not equal: %s != %s" % ( a, b )
-  assert hash( a ) == hash( b ), u"hashes were not equal: %s != %s" % ( hash( a ), hash( b ) )
-
-  assert str( a ) == str( b ), u"strings were not equal: %s != %s" % ( a, b )
+  eq( str( a ), str( b ) )
 
 def assert_unequal_objects_and_strings( a, b ):
 
-  assert a is not b, u"expecting different instances: %s is %s" % ( a, b )
+  ne( a, b )
+  ne( hash( a ), hash( b ) )
 
-  assert a != b, u"objects were equal: %s == %s" % ( a, b )
-  assert hash( a ) != hash( b ), u"hashes were equal: %s == %s" % ( hash( a ), hash( b ) )
-
-  assert str( a ) != str( b ), u"strings were equal: %s == %s" % ( a, b )
+  ne( str( a ), str( b ) )
 
 def assert_unequal_objects_but_equal_strings( a, b ):
 
-  assert a is not b, u"expecting different instances: %s is %s" % ( a, b )
+  ne( a, b )
+  ne( hash( a ), hash( b ) )
 
-  assert a != b, u"objects were equal: %s == %s" % ( a, b )
-  assert hash( a ) != hash( b ), u"hashes were equal: %s == %s" % ( hash( a ), hash( b ) )
-
-  assert str( a ) == str( b ), u"strings were not equal: %s != %s" % ( a, b )
-
+  eq( str( a ), str( b ) )

@@ -10,7 +10,7 @@ class Option( object ):
 
   class OptionWasAbsent( Exception ): pass
 
-  # ============================================================================
+  # ====================================
 
   def __init__( s, item ):
     s._validate( item )
@@ -27,7 +27,8 @@ class Option( object ):
       else:
         raise s.OptionCannotWrapOption()
 
-  # ============================================================================
+  
+  # ====================================
 
   # http://stackoverflow.com/questions/1307014/python-str-versus-unicode
   def __str__( self ):
@@ -39,7 +40,7 @@ class Option( object ):
     else:
       return 'Option.absent'
 
-  # ============================================================================
+  # ====================================
 
   def __hash__( s ):
     return hash( s._item )
@@ -53,16 +54,7 @@ class Option( object ):
   def __ne__( s, other ):
     return not s.__eq__( other )
 
-  # ============================================================================
-
-  @property
-  def option( s ):
-    if s.is_present:
-      return s._item
-    else:
-      raise s.OptionWasAbsent()
-
-  # ============================================================================
+  # ====================================
 
   @property
   def is_present( s ):
@@ -72,7 +64,16 @@ class Option( object ):
   def is_absent( s ):
     return s._item is None
 
-  # ============================================================================
+  # ====================================
+
+  @property
+  def option( s ):
+    if s.is_present:
+      return s._item
+    else:
+      raise s.OptionWasAbsent()
+
+  # ====================================
 
   def option_default( s, default ):
     if s.is_present:
@@ -80,7 +81,7 @@ class Option( object ):
     else:
       return default
 
-  # ============================================================================
+  # ====================================
 
   @classmethod
   def adapt( s, x ):
@@ -101,10 +102,8 @@ class Option( object ):
 
     return outer
 
-# ------------------------------------------------------------------------------
+# ==============================================================================
 
 absent_has_been_created = False
-
 Option.absent = Option( None )
-
 absent_has_been_created = True
