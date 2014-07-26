@@ -11,7 +11,7 @@ This library provides helpers for implementing value objects in Python. The libr
 * **GitHub Repo**: https://github.com/stevewedig/value-objects-in-python
 * **License**: This project is in the public domain via [Unlicense](http://unlicense.org).
 
-[Vladimir Keleshev](https://github.com/halst) has an alternative Python library for [value objects](https://github.com/halst/value) that makes some slightly different design decisions. My library is a combination of techniques I've used before and Vladimir's choice for syntax (using `__init__` to indicate field name, order, and default values).
+[Vladimir Keleshev](https://github.com/halst) has an alternative Python library for [value objects](https://github.com/halst/value) that makes some different design decisions. My library is a combination of techniques I've used before and Vladimir's choice for syntax (using `__init__` to indicate field name, order, and default values).
 
 ### Installation via Pip
 
