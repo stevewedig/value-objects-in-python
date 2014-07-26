@@ -8,9 +8,8 @@ Value Objects in Python
 
 This library provides helpers for implementing value objects in Python. The library's rationale and usage instructions can be found in this blog post: [Value Objects in Java & Python](http://stevewedig.com).
 
-* This project's GitHub repo: https://github.com/stevewedig/value-objects-in-python
-* Blog post explaining this project: [Immutable Value Objects in Java & Python](http://stevewedig.com)
-* This project is in the public domain via [Unlicense](http://unlicense.org).
+* **GitHub Repo**: https://github.com/stevewedig/value-objects-in-python
+* **License**: This project is in the public domain via [Unlicense](http://unlicense.org).
 
 [Vladimir Keleshev](https://github.com/halst) has an alternative Python library for [value objects](https://github.com/halst/value) that makes some slightly different design decisions. My library is a combination of techniques I've used before and Vladimir's choice for syntax (using `__init__` to indicate field name, order, and default values).
 
