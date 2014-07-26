@@ -1,13 +1,13 @@
 
 import unittest
 
-from .tdd import eq
-from .once import once
+from value_objects.util.tdd import eq
+from value_objects.util.once import once
 
 class OnceTestCase( unittest.TestCase ):
 
-  def testExample( self ):
-
+  def test_example( self ):
+    
     class Person( object ):
       def __init__( s, age ):
         s.double_count = 0
@@ -29,7 +29,7 @@ class OnceTestCase( unittest.TestCase ):
     eq( 10, person.double_age )
     eq( 1, person.double_count )
 
-  def testUnnamed( sef ):
+  def test_unnamed( sef ):
     '''
     make sure methods with the same __name__ are cached separately
     '''

@@ -9,13 +9,13 @@ except ImportError:
 
 from inspect import getargspec
 
-from .once import once
+from value_objects.util.once import once
 
 # ==============================================================================
-# ValueObject
+# ValueMixin
 # ==============================================================================
 
-class ValueObject( object ):
+class ValueMixin( object ):
 
   def __new__( klass, *positionalFields, **keywordFields ):
     
@@ -123,13 +123,13 @@ def parseFieldNamesAndDefaultValues( init ):
   fieldNames = tuple( fieldNames[1:] )
 
   if args:
-      raise ValueError( 'ValueObject: `*args` are not allowed in __init__' )
+      raise ValueError( 'ValueMixin: `*args` are not allowed in __init__' )
 
   if kwargs:
-      raise ValueError( 'ValueObject: `**kwargs` are not allowed in __init__' )
+      raise ValueError( 'ValueMixin: `**kwargs` are not allowed in __init__' )
 
   if not all( type( name ) is str for name in fieldNames ):
-      raise ValueError( 'ValueObject: parameter unpacking is not allowed in __init__' )
+      raise ValueError( 'ValueMixin: parameter unpacking is not allowed in __init__' )
 
   defaultValues = () if not defaultValues else defaultValues
 

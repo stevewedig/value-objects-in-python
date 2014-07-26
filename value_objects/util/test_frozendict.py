@@ -1,12 +1,12 @@
 
 import unittest
 
-from .tdd import eq, ne, raises
-from .frozendict import frozendict
+from value_objects.util.tdd import eq, ne, raises
+from value_objects.util.frozendict import frozendict
 
 class FrozendictTestCase( unittest.TestCase ):
 
-  def testIdentity( self ):
+  def test_identity( self ):
     dict_0 = frozendict()
 
     dict_1 = frozendict( 
@@ -56,7 +56,7 @@ class FrozendictTestCase( unittest.TestCase ):
     verify_set.add( dict_0 )
     eq( 2, len( verify_set ) )
 
-  def testImmutable( self ):
+  def test_immutable( self ):
     d = frozendict( { 1 : 1 } )
 
     def update():

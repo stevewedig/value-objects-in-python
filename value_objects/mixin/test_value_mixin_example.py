@@ -1,23 +1,22 @@
 
 import unittest
 
-from .frozendict import frozendict
-from .ValueObject import ValueObject
-from .tdd import eq, ne
+from value_objects.util.tdd import eq, ne
+from value_objects import ValueMixin, frozendict
 
 # ============================================================================
 # Path, Query, PathQuery
 # ============================================================================
 
-class Path( ValueObject ):
+class Path( ValueMixin ):
   def __init__( self, parts ):
     pass
 
-class Query( ValueObject ):
+class Query( ValueMixin ):
   def __init__( self, params ):
     pass
 
-class PathQuery( ValueObject ):
+class PathQuery( ValueMixin ):
   def __init__( self, path, query ):
     pass
 
@@ -25,9 +24,9 @@ class PathQuery( ValueObject ):
 # test
 # ============================================================================
 
-class ValueObjectTestCase( unittest.TestCase ):
+class ValueMixinTestCase( unittest.TestCase ):
 
-  def testValueObjectExample( self ):
+  def testValueMixinExample( self ):
     # 3 paths
     path1 = Path( ( 'blog', 'posts' ) )  # positional input
     path2 = Path( parts = ( 'blog', 'posts' ) )

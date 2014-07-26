@@ -1,14 +1,14 @@
 
 import unittest
 
-from .ValueObject import ValueObject
-from .tdd import eq
+from value_objects.util.tdd import eq
+from value_objects import ValueMixin
 
 # ============================================================================
 # AbsPath <: Path
 # ============================================================================
 
-class RelPath( ValueObject ):
+class RelPath( ValueMixin ):
   def __init__( self, parts ):
     pass
 
@@ -28,9 +28,9 @@ class AbsPath( RelPath ):
 # make sure inheritance works, not that I recommend it
 # ============================================================================
 
-class TestValueObjectInheritance( unittest.TestCase ):
+class TestValueMixinInheritance( unittest.TestCase ):
 
-  def testValueObjectInheritance( self ):
+  def testValueMixinInheritance( self ):
 
     relPath = RelPath( parts = ( 'blog', 'posts' ) )
     eq( relPath.dotted_path, 'blog.posts' )

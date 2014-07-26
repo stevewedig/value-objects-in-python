@@ -1,18 +1,18 @@
 
 import unittest
 
-from .tdd import raises
-from .ValueObject import ValueObject
+from value_objects.util.tdd import raises
+from value_objects import ValueMixin
 
 # these tests are ported from halst's Value Object library for Python: 
 # https://github.com/halst/value
 
 def fixture(init):
-    class Option(ValueObject):
+    class Option(ValueMixin):
         __init__ = init
     return Option
 
-class ValueObjectTestCase( unittest.TestCase ):
+class ValueMixinTestCase( unittest.TestCase ):
 
   def test_primitive_value(self):
       Option = fixture(lambda self: None)
