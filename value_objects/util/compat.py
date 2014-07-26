@@ -7,4 +7,8 @@ except ImportError:
     # Python 3
     izip = zip
     
-    
+try:
+  unicode
+except NameError:
+  unicode = str
+

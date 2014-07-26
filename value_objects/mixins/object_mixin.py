@@ -2,14 +2,14 @@
 import sys
 from inspect import getargspec
 
-from value_objects.util.zip import izip
+from value_objects.util.compat import izip
 from value_objects.mixins.object_helper import ObjectHelper
 
 # ==============================================================================
 
 class ObjectMixin( object ):
 
-  def __new__( klass, *positionalFields, **keywordFields ):
+  def __new__( klass, *positional_fields, **keyword_fields ):
 
     # Could use a metaclass to do this during class construction instead of
     # during instance construction, but I don't want to get into that.
@@ -17,8 +17,8 @@ class ObjectMixin( object ):
 
     instance = object.__new__( klass )
 
-    instance.__dict__.update( izip( klass.field_names, positionalFields ) )
-    instance.__dict__.update( keywordFields )
+    instance.__dict__.update( izip( klass.field_names, positional_fields ) )
+    instance.__dict__.update( keyword_fields )
 
     return instance
 
@@ -26,7 +26,7 @@ class ObjectMixin( object ):
   # creating object_helper
   # ====================================
 
-  # self.is_entity is an abstract hook
+  # self.is_entity is an abstract hook, set by ValueMixin or EntityMixin
 
   @property
   def object_helper( self ):
