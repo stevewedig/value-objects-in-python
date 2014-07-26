@@ -38,5 +38,5 @@ class TestValueMixinInheritance( unittest.TestCase ):
     absPath = AbsPath( relPath = relPath, root = 'C:/' )
 
     eq( absPath.dotted_path, 'blog.posts' )
-    eq( absPath.valueObjectFieldNames, ( 'relPath', 'root' ) )
+    eq( absPath.fieldNames, ( 'relPath', 'root' ) )
     eq( repr( absPath ), "AbsPath{relPath=RelPath{parts=('blog', 'posts')}, root='C:/'}" )

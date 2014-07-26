@@ -8,6 +8,8 @@ except ImportError:
     izip = zip
 
 from inspect import getargspec
+
+from frozendict import frozendict
 from once import once
 from object_mixin import ObjectMixin
 
@@ -18,14 +20,14 @@ from object_mixin import ObjectMixin
 class ValueMixin( ObjectMixin ):
 
   def __new__( klass, *positionalFields, **keywordFields ):
-    
-    # Could use a metaclass to do this during class construction instead of 
+
+    # Could use a metaclass to do this during class construction instead of
     # during instance construction, but I don't want to get into that.
     initClass( klass )
 
     instance = object.__new__( klass )
 
-    instance.__dict__.update( izip( klass.valueObjectFieldNames, positionalFields ) )
+    instance.__dict__.update( izip( klass.fieldNames, positionalFields ) )
     instance.__dict__.update( keywordFields )
 
     return instance
@@ -35,38 +37,36 @@ class ValueMixin( ObjectMixin ):
   # ====================================
 
   @once
-  def valueObjectFieldValues( self ):
-    return tuple( getattr( self, name ) for name in self.valueObjectFieldNames )
+  def fieldValues( self ):
+    return tuple( getattr( self, name ) for name in self.fieldNames )
 
   @property
-  def valueObjectFieldCount( self ):
-    return len( self.valueObjectFieldNames )
-
-  @property
-  def valueObjectFieldPairs( self ):
-    return izip( self.valueObjectFieldNames, self.valueObjectFieldValues )
+  def fieldPairs( self ):
+    return izip( self.fieldNames, self.fieldValues )
 
   # ====================================
   # str and repr
   # ====================================
 
-  @property
-  def valueObjectPairReprs( self ):
-    for name, value in self.valueObjectFieldPairs:
-      yield '%s=%s' % ( name, repr( value ) )
-
-  @property
-  def valueObjectPairStrs( self ):
-    for name, value in self.valueObjectFieldPairs:
-      yield '%s=%s' % ( name, str( value ) )
-
   def __repr__( self ):
-    arcs = ', '.join( self.valueObjectPairReprs )
-    return '%s{%s}' % ( self.__class__.__name__, arcs )
+    
+    pairStrs = (
+      '%s=%s' % ( name, repr( value ) ) for name, value in self.fieldPairs
+    )
+    
+    body = ', '.join( pairStrs )
+    
+    return '%s{%s}' % ( self.__class__.__name__, body )
 
-  def __str__( self ):
-    arcs = ', '.join( self.valueObjectPairStrs )
-    return '%s{%s}' % ( self.__class__.__name__, arcs )
+  def __unicode__( self ):
+    
+    pairStrs = (
+      '%s=%s' % ( name, unicode( value ) ) for name, value in self.fieldPairs
+    )
+    
+    body = u', '.join( pairStrs )
+    
+    return u'%s{%s}' % ( self.__class__.__name__, body )
 
   # ====================================
   # hash
@@ -77,7 +77,7 @@ class ValueMixin( ObjectMixin ):
 
   @once
   def valueObjectHash( self ):
-    return hash( self.valueObjectFieldValues )
+    return hash( self.fieldValues )
 
   # ====================================
   # equals
@@ -87,7 +87,7 @@ class ValueMixin( ObjectMixin ):
     if( self.__class__ != other.__class__ ):
       return False
 
-    return self.valueObjectFieldValues == other.valueObjectFieldValues
+    return self.fieldValues == other.fieldValues
 
   def __ne__( self, other ):
     return not self.__eq__( other )
@@ -97,7 +97,7 @@ class ValueMixin( ObjectMixin ):
 # ==============================================================================
 
 def initClass( klass ):
-  
+
   # only need to init class once
   # checking .valueObjectClass enables init to happen for subclasses
   try:
@@ -107,9 +107,9 @@ def initClass( klass ):
     pass
 
   setattr( klass, 'valueObjectClass', klass )
-    
+
   fieldNames, defaultValues = parseFieldNamesAndDefaultValues( klass.__init__ )
-  setattr( klass, 'valueObjectFieldNames', fieldNames )
+  setattr( klass, 'fieldNames', fieldNames )
 
   # defaultValues implemented as class attributes
   for name, defaultValue in izip( reversed( fieldNames ), reversed( defaultValues ) ):
