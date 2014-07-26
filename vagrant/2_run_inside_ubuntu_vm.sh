@@ -10,6 +10,6 @@ chmod +x 3_provision_and_test.sh
 ./3_provision_and_test.sh
 
 # next steps...
-# - "vagrant exit" to exit ubuntu vm
+# - "exit" to exit ubuntu vm
 # - "vagrant destroy" to halt and delete the vm
 
