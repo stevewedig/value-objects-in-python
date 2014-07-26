@@ -9,12 +9,13 @@ except ImportError:
 
 from inspect import getargspec
 from once import once
+from object_mixin import ObjectMixin
 
 # ==============================================================================
 # ValueMixin
 # ==============================================================================
 
-class ValueMixin( object ):
+class ValueMixin( ObjectMixin ):
 
   def __new__( klass, *positionalFields, **keywordFields ):
     
