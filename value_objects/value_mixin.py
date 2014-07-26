@@ -9,10 +9,60 @@ except ImportError:
 
 from inspect import getargspec
 
-from frozendict import frozendict
 from once import once
 from object_mixin import ObjectMixin
 
+# ==============================================================================
+
+class ObjectHelper( object ):
+  
+  def __init__( self, object_class, field_names, field_values ):
+    self.object_class = object_class
+    self.field_names = field_names
+    self.field_values = field_values
+
+  @once
+  def class_and_state_unicode( self ):
+    
+    pairStrs = ( 
+      '%s=%s' % ( name, unicode( value ) ) for name, value in self.field_pairs
+    )
+
+    body = ', '.join( pairStrs )
+
+    return '%s{%s}' % ( self.object_class.__name__, body )
+    
+  @once
+  def class_and_state_repr( self ):
+    
+    pairStrs = ( 
+      '%s=%s' % ( name, repr( value ) ) for name, value in self.field_pairs
+    )
+
+    body = ', '.join( pairStrs )
+
+    return '%s{%s}' % ( self.object_class.__name__, body )
+
+  def class_and_state_equals( self, other_object ):
+    try:
+      other_helper = other_object.object_helper
+    except AttributeError:
+      return False
+  
+    return self.class_and_state == other_helper.class_and_state
+  
+  @once
+  def class_and_state_hash( self ):
+    return hash( self.class_and_state )
+
+  @property
+  def field_pairs( self ):
+    return izip( self.field_names, self.field_values )
+
+  @once
+  def class_and_state( self ):
+    return ( self.object_class, self.field_values )
+    
 # ==============================================================================
 # ValueMixin
 # ==============================================================================
@@ -44,50 +94,37 @@ class ValueMixin( ObjectMixin ):
   def fieldPairs( self ):
     return izip( self.fieldNames, self.fieldValues )
 
+  @once
+  def object_helper( self ):
+    return ObjectHelper(
+      object_class = type( self ), 
+      field_names = self.fieldNames, 
+      field_values = self.fieldValues,
+    )
+
   # ====================================
   # str and repr
   # ====================================
 
   def __repr__( self ):
-    
-    pairStrs = (
-      '%s=%s' % ( name, repr( value ) ) for name, value in self.fieldPairs
-    )
-    
-    body = ', '.join( pairStrs )
-    
-    return '%s{%s}' % ( self.__class__.__name__, body )
+    return self.object_helper.class_and_state_repr
 
   def __unicode__( self ):
-    
-    pairStrs = (
-      '%s=%s' % ( name, unicode( value ) ) for name, value in self.fieldPairs
-    )
-    
-    body = u', '.join( pairStrs )
-    
-    return u'%s{%s}' % ( self.__class__.__name__, body )
+    return self.object_helper.class_and_state_unicode
 
   # ====================================
   # hash
   # ====================================
 
   def __hash__( self ):
-    return self.valueObjectHash
-
-  @once
-  def valueObjectHash( self ):
-    return hash( self.fieldValues )
+    return self.object_helper.class_and_state_hash
 
   # ====================================
   # equals
   # ====================================
 
   def __eq__( self, other ):
-    if( self.__class__ != other.__class__ ):
-      return False
-
-    return self.fieldValues == other.fieldValues
+    return self.object_helper.class_and_state_equals( other )
 
   def __ne__( self, other ):
     return not self.__eq__( other )
