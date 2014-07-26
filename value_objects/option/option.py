@@ -1,6 +1,6 @@
 
-from decorate import wraps
-from object_mixin import ObjectMixin
+from value_objects.util.decorate import wraps
+from value_objects.mixins.object_mixin import ObjectMixin
 
 class Option( ObjectMixin ):
 

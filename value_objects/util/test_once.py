@@ -2,7 +2,7 @@
 import unittest
 
 from value_objects import once
-from value_objects.testing import eq
+from value_objects.util.testing import eq
 
 class OnceTestCase( unittest.TestCase ):
 

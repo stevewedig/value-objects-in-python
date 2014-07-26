@@ -5,8 +5,8 @@
 # from http://code.activestate.com/recipes/414283/
 # https://github.com/slezica/python-frozendict
 
-from once import once
-from value_objects.not_mutable import not_mutable
+from value_objects.util.once import once
+from value_objects.util.not_mutable import not_mutable
 
 class frozendict( dict ):
   '''

@@ -1,12 +1,14 @@
 
 __all__ = 'ValueMixin, NotMutable, not_mutable, frozendict, once, Option'
 
-# mixin
-from value_mixin import ValueMixin
+# util
+from value_objects.util.not_mutable import NotMutable, not_mutable
+from value_objects.util.frozendict import frozendict
+from value_objects.util.once import once
 
-# other relevant useful stuff
-from not_mutable import NotMutable, not_mutable
-from frozendict import frozendict
-from once import once
-from option import Option
+# mixins
+from value_objects.mixins.object_mixin import ObjectMixin
+from value_objects.mixins.value_mixin import ValueMixin
 
+# option
+from value_objects.option.option import Option

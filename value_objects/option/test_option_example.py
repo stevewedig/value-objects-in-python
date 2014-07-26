@@ -2,7 +2,7 @@
 import unittest
 
 from value_objects import once, Option
-from value_objects.testing import eq
+from value_objects.util.testing import eq
 
 class Person( object ):
   def __init__(

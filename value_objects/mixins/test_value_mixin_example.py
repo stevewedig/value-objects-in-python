@@ -3,7 +3,7 @@ import unittest
 
 from value_objects import frozendict
 from value_objects import ValueMixin
-from value_objects.testing import eq, ne
+from value_objects.util.testing import eq, ne
 
 # ============================================================================
 # Path, Query, PathQuery

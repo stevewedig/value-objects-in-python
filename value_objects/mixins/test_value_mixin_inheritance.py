@@ -2,7 +2,7 @@
 import unittest
 
 from value_objects import ValueMixin
-from value_objects.testing import eq
+from value_objects.util.testing import eq
 
 # ============================================================================
 # AbsPath <: Path

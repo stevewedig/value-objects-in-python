@@ -2,7 +2,7 @@
 import unittest
 
 from value_objects import Option
-from value_objects.testing import eq, ne, raises, assert_equal_objects_and_strings, assert_unequal_objects_and_strings
+from value_objects.util.testing import eq, ne, raises, assert_equal_objects_and_strings, assert_unequal_objects_and_strings
 
 class OptionTestCase( unittest.TestCase ):
 

@@ -2,7 +2,7 @@
 import unittest
 
 from value_objects import frozendict, NotMutable
-from value_objects.testing import raises, assert_equal_objects_and_strings, assert_unequal_objects_and_strings
+from value_objects.util.testing import raises, assert_equal_objects_and_strings, assert_unequal_objects_and_strings
 
 class FrozendictTestCase( unittest.TestCase ):
 

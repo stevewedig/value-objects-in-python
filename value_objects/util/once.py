@@ -1,5 +1,5 @@
 
-from value_objects.decorate import wraps
+from value_objects.util.decorate import wraps
 
 def once( compute ):
   '''
