@@ -1,24 +1,23 @@
 
 import unittest
 
-from value_objects import frozendict
-from value_objects import ValueMixin
-from value_objects.util.testing import eq, ne
+from value_objects import ValueMixin, Option
+from value_objects.util.testing import assert_equal_objects_and_strings, assert_unequal_objects_and_strings
 
 # ============================================================================
-# Path, Query, PathQuery
+# classes
 # ============================================================================
 
-class Path( ValueMixin ):
-  def __init__( self, parts ):
+class Image( ValueMixin ):
+  def __init__( self, url, height = Option.absent, width = Option.absent ):
     pass
 
-class Query( ValueMixin ):
-  def __init__( self, params ):
+class Article( ValueMixin ):
+  def __init__( self, url, title, image = Option.absent ):
     pass
 
-class PathQuery( ValueMixin ):
-  def __init__( self, path, query ):
+class Feed( ValueMixin ):
+  def __init__( self, url, title, articles ):
     pass
 
 # ============================================================================
@@ -28,53 +27,54 @@ class PathQuery( ValueMixin ):
 class ValueMixinTestCase( unittest.TestCase ):
 
   def testValueMixinExample( self ):
-    # 3 paths
-    path1 = Path( ( 'blog', 'posts' ) )  # positional input
-    path2 = Path( parts = ( 'blog', 'posts' ) )
-    path3 = Path( parts = ( 'blog', 'comments' ) )
 
-    # path 1 and 2 are different instances, but have same value
-    assert path1 is not path2
-    eq( path1, path2 )
-    eq( hash( path1 ), hash( path2 ) )
-    eq( repr( path1 ), repr( path2 ) )
-    eq( str( path1 ), str( path2 ) )
+    # same images
+    image1 = Image( "http://image.com", Option( 20 ), Option( 30 ) )
+    image2 = Image( "http://image.com", Option( 20 ), Option( 30 ) )
+    assert_equal_objects_and_strings( image1, image2 )
 
-    # path 1 and 3 have different value
-    assert path1, path3
-    ne( hash( path1 ), hash( path3 ) )
-    ne( repr( path1 ), repr( path3 ) )
-    ne( str( path1 ), str( path3 ) )
+    # image with different url
+    assert_unequal_objects_and_strings( image1, Image( u"http://xxx.com", Option( 20 ), Option( 30 ) ) )
 
-    # 1 query
-    query = Query( frozendict( id = '1' ) )  # positional input
+    # image without size
+    assert_unequal_objects_and_strings( image1, Image( u"http://image.com" ) )
 
-    # 3 path queries
-    pathQuery1 = PathQuery( path1, query ) # positional input
-    pathQuery2 = PathQuery( path = path2, query = query )
-    pathQuery3 = PathQuery( path = path3, query = query )
+    # same articles
+    article1 = Article( u"http://article.com", u"My Article", Option( image1 ) )
+    article2 = Article( u"http://article.com", u"My Article", Option( image2 ) )
+    assert_equal_objects_and_strings( article1, article2 )
 
-    # pathQuery 1 and 2 are different instances, but have same value
-    assert pathQuery1 is not pathQuery2
-    eq( pathQuery1, pathQuery2 )
-    eq( hash( pathQuery1 ), hash( pathQuery2 ) )
-    eq( repr( pathQuery1 ), repr( pathQuery2 ) )
-    eq( str( pathQuery1 ), str( pathQuery2 ) )
+    # article with different url
+    assert_unequal_objects_and_strings( article1, Article( u"http://xxx.com", u"My Article", image1 ) )
 
-    # pathQuery 1 and 3 have different value
-    ne( pathQuery1, pathQuery3 )
-    ne( hash( pathQuery1 ), hash( pathQuery3 ) )
-    ne( repr( pathQuery1 ), repr( pathQuery3 ) )
-    ne( str( pathQuery1 ), str( pathQuery3 ) )
+    # article with different title
+    assert_unequal_objects_and_strings( article1, Article( u"http://article.com", u"xxx",
+        image1 ) )
 
-    # repr
-    eq( repr(path1), "Path{parts=('blog', 'posts')}" )
-    eq( repr(query), "Query{params=frozendict({'id': '1'})}" )
-    eq( repr(pathQuery1), "PathQuery{path=Path{parts=('blog', 'posts')}, query=Query{params=frozendict({'id': '1'})}}" )
-    
-    # str (same as repr when the children have the same str as repr)
-    eq( str(path1), "Path{parts=('blog', 'posts')}" )
-    eq( str(query), "Query{params=frozendict({'id': '1'})}" )
-    eq( str(pathQuery1), "PathQuery{path=Path{parts=('blog', 'posts')}, query=Query{params=frozendict({'id': '1'})}}" )
-    
-    
+    # article with different image
+    assert_unequal_objects_and_strings( article1, Article( u"http://article.com", u"My Article", Image( u"http://xxx.com" ) ) )
+
+    # article without an image
+    assert_unequal_objects_and_strings( article1, Article( u"http://article.com", u"My Article" ) )
+
+    # same feeds
+    article3 = Article( u"http://article3.com", u"My Article 3" )
+    feed1 = Feed( u"http://feed.com", u"My Feed", ( article1, article3 ) )
+    feed2 = Feed( u"http://feed.com", u"My Feed", ( article1, article3 ) )
+    assert_equal_objects_and_strings( feed1, feed2 )
+
+    # feed with different url
+    assert_unequal_objects_and_strings( feed1, Feed( u"http://xxx.com", u"My Feed", (article1, article3) ) )
+
+    # feed with different title
+    assert_unequal_objects_and_strings( feed1, Feed( u"http://feed.com", u"xxx", (article1, article3) ) )
+
+    # feed with different articles
+    assert_unequal_objects_and_strings( feed1, Feed( u"http://feed.com", u"My Feed", (article1, ) ) )
+
+    # feed with different article order
+    assert_unequal_objects_and_strings( feed1, Feed( u"http://feed.com", u"My Feed", (article3, article1) ) )
+
+    # feed without articles
+    assert_unequal_objects_and_strings( feed1, Feed( u"http://feed.com", u"My Feed", tuple() ) )
+
