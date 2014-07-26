@@ -1,9 +1,10 @@
-Value Objects in Python
-=======================
 
 (This is a work in progress: the blog post isn't published.)
 
-GitHub has a rendered version of this readme: https://github.com/stevewedig/value-objects-in-python/blob/master/README.md
+Value Objects in Python
+=======================
+
+(GitHub has a rendered version of this readme: https://github.com/stevewedig/value-objects-in-python/blob/master/README.md)
 
 This library provides helpers for implementing value objects in Python. The library's rationale and usage instructions can be found in this blog post: [Value Objects in Java & Python](http://stevewedig.com).
 
