@@ -23,9 +23,17 @@ The easiest way to install this library is to use [Pip](http://en.wikipedia.org/
 
 Alternatively you can just copy the library code directory into your own codebase.
 
-## Other Blog Posts
+### Running Tox tests in Vagrant
 
-In addition to this project's blog post ([Value Objects in Java & Python](http://stevewedig.com)), here are others that may be of interest:
+[Vagrant](http://www.vagrantup.com/) is a great way to run sandboxed experiments on your dev machine. I used Vagrant plus [Tox](https://testrun.org/tox/latest/) to quickly test this library in Python 2.6, 2.7, 3.1 - 3.4. The three scripts I used are included in this project. Aftering going through the Vagrant tutorial, you should be able to try them out:
+
+* Setup the VM on your dev machine: [1_enter_ubuntu_vm.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/1_enter_ubuntu_vm.sh)
+* Download and run the provision and test script inside the VM: [2_run_inside_ubuntu_vm.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/2_run_inside_ubuntu_vm.sh)
+* The provision and test script: [3_provision_and_test.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/3_provision_and_test.sh)
+
+### Other Blog Posts
+
+In addition to this project's blog post ([Value Objects in Java & Python](http://stevewedig.com)), here are others that may (or may not) be of interest:
 
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 * [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
