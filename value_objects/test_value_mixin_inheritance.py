@@ -1,14 +1,14 @@
 
 import unittest
 
-from value_objects import ValueMixin
+from value_objects import value_mixin
 from value_objects.testing import eq
 
 # ============================================================================
 # AbsPath <: Path
 # ============================================================================
 
-class RelPath( ValueMixin ):
+class RelPath( value_mixin ):
   def __init__( self, parts ):
     pass
 

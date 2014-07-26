@@ -8,8 +8,11 @@ except ImportError:
     izip = zip
 
 from inspect import getargspec
-
 from once import once
+
+# ==============================================================================
+# ValueMixin
+# ==============================================================================
 
 class ValueMixin( object ):
 
@@ -26,9 +29,9 @@ class ValueMixin( object ):
 
     return instance
 
-  # ============================================================================
+  # ====================================
   # fields
-  # ============================================================================
+  # ====================================
 
   @once
   def valueObjectFieldValues( self ):
@@ -42,9 +45,9 @@ class ValueMixin( object ):
   def valueObjectFieldPairs( self ):
     return izip( self.valueObjectFieldNames, self.valueObjectFieldValues )
 
-  # ============================================================================
+  # ====================================
   # str and repr
-  # ============================================================================
+  # ====================================
 
   @property
   def valueObjectPairReprs( self ):
@@ -64,9 +67,9 @@ class ValueMixin( object ):
     arcs = ', '.join( self.valueObjectPairStrs )
     return '%s{%s}' % ( self.__class__.__name__, arcs )
 
-  # ============================================================================
+  # ====================================
   # hash
-  # ============================================================================
+  # ====================================
 
   def __hash__( self ):
     return self.valueObjectHash
@@ -75,9 +78,9 @@ class ValueMixin( object ):
   def valueObjectHash( self ):
     return hash( self.valueObjectFieldValues )
 
-  # ============================================================================
+  # ====================================
   # equals
-  # ============================================================================
+  # ====================================
 
   def __eq__( self, other ):
     if( self.__class__ != other.__class__ ):

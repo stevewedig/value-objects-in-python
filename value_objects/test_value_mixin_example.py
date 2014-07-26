@@ -1,22 +1,23 @@
 
 import unittest
 
-from value_objects import ValueMixin, frozendict
+from value_objects import frozendict
+from value_objects import value_mixin
 from value_objects.testing import eq, ne
 
 # ============================================================================
 # Path, Query, PathQuery
 # ============================================================================
 
-class Path( ValueMixin ):
+class Path( value_mixin ):
   def __init__( self, parts ):
     pass
 
-class Query( ValueMixin ):
+class Query( value_mixin ):
   def __init__( self, params ):
     pass
 
-class PathQuery( ValueMixin ):
+class PathQuery( value_mixin ):
   def __init__( self, path, query ):
     pass
 
