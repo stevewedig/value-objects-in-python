@@ -34,7 +34,7 @@ class Option( object ):
     return unicode( self ).encode( 'utf-8' )
 
   def __unicode__( s ):
-    if s.exists:
+    if s.is_present:
       return 'Option( %s )' % s._item
     else:
       return 'Option.absent'
@@ -57,7 +57,7 @@ class Option( object ):
 
   @property
   def option( s ):
-    if s.exists:
+    if s.is_present:
       return s._item
     else:
       raise s.OptionWasAbsent()
@@ -65,13 +65,17 @@ class Option( object ):
   # ============================================================================
 
   @property
-  def exists( s ):
-    return s._item is not None
+  def is_present( s ):
+    return not s.is_absent
+
+  @property
+  def is_absent( s ):
+    return s._item is None
 
   # ============================================================================
 
   def option_default( s, default ):
-    if s.exists:
+    if s.is_present:
       return s.option
     else:
       return default
@@ -79,7 +83,7 @@ class Option( object ):
   # ============================================================================
 
   @classmethod
-  def wrap( s, x ):
+  def adapt( s, x ):
     if isinstance( x, Option ):
       return x
     elif x is None:
@@ -87,15 +91,13 @@ class Option( object ):
     else:
       return Option( x )
 
-  # ============================================================================
-
   @classmethod
-  def wrapper( s, item ):
+  def adapter( s, fn ):
 
-    @wraps( item )
+    @wraps( fn )
     def outer( *a, **kw ):
-      val = item( *a, **kw )
-      return Option.wrap( val )
+      output = fn( *a, **kw )
+      return Option.adapt( output )
 
     return outer
 

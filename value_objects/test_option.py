@@ -9,7 +9,7 @@ class OptionTestCase( unittest.TestCase ):
   
   def test_nothing( self ):
     
-    assert not Option.absent.exists
+    assert not Option.absent.is_present
     
     ne( Option.absent, None )
     
@@ -24,7 +24,7 @@ class OptionTestCase( unittest.TestCase ):
   
     five = Option( 5 )
     
-    assert five.exists
+    assert five.is_present
     
     eq( 
       5,
@@ -45,7 +45,7 @@ class OptionTestCase( unittest.TestCase ):
   # ==============================================================================
   
   def test_nothing_2( self ):
-    assert not Option.absent.exists
+    assert not Option.absent.is_present
     
     assert Option.absent != None
    
@@ -60,7 +60,7 @@ class OptionTestCase( unittest.TestCase ):
   
     five = Option( 5 )
     
-    assert five.exists
+    assert five.is_present
     
     assert 5 == five.option
     
@@ -91,32 +91,32 @@ class OptionTestCase( unittest.TestCase ):
     
   # ==============================================================================
   
-  def test_wrap( self ):
+  def test_adapt( self ):
     eq(
       Option.absent,
-      Option.wrap( Option.absent ),
+      Option.adapt( Option.absent ),
     )
   
     eq(
       Option( 5 ),
-      Option.wrap( Option( 5 ) ),
+      Option.adapt( Option( 5 ) ),
     )
     
     eq(
       Option.absent,
-      Option.wrap( None ),
+      Option.adapt( None ),
     )
     
     eq(
       Option( 5 ),
-      Option.wrap( 5 ),
+      Option.adapt( 5 ),
     )
   
   # ==============================================================================
   
-  def test_wrapper_fn( self ):
+  def test_adapter_fn( self ):
     
-    @Option.wrapper  
+    @Option.adapter  
     def fn( x ):
       return x
   
@@ -124,10 +124,10 @@ class OptionTestCase( unittest.TestCase ):
     eq( Option( 5 ), fn( 5 ) )
     
   
-  def test_wrapper_method( self ):
+  def test_adapter_method( self ):
   
     class Person( object ):
-      @Option.wrapper
+      @Option.adapter
       def method( s, x ):
         return x
     

@@ -2,7 +2,7 @@
 import unittest
 
 from value_objects import once, Option
-from value_objects.testing import eq, ne, raises
+from value_objects.testing import eq
 
 class Person( object ):
   def __init__(
@@ -28,7 +28,7 @@ class Person( object ):
   
   # decorator
   @once
-  @Option.wrapper
+  @Option.adapter
   def social_security( s ):
     return s._social_security
     
@@ -44,10 +44,10 @@ class OptionTestCase( unittest.TestCase ):
       social_security = 1234,
     )
   
-    assert steve.middle_name.exists
+    assert steve.middle_name.is_present
     eq( 'Michael', steve.middle_name.option )
     
-    assert steve.social_security.exists
+    assert steve.social_security.is_present
     eq( 1234, steve.social_security.option )
     
     dan = Person(
@@ -55,6 +55,6 @@ class OptionTestCase( unittest.TestCase ):
       last_name = 'Soudek',
     )
   
-    assert not dan.middle_name.exists
-    assert not dan.social_security.exists
+    assert not dan.middle_name.is_present
+    assert not dan.social_security.is_present
   
