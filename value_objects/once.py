@@ -1,8 +1,6 @@
 
 from value_objects.decorate import wraps
 
-# http://stevewedig.com/2014/01/27/a-few-python-tricks/
-
 def once( compute ):
   '''
   Use @once instead of @property when you want a cached property 

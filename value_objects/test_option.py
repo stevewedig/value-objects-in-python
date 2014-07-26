@@ -4,9 +4,6 @@ import unittest
 from value_objects import Option
 from value_objects.testing import eq, ne, raises
 
-# ==============================================================================
-# ==============================================================================
-
 class OptionTestCase( unittest.TestCase ):
   
   
@@ -17,11 +14,10 @@ class OptionTestCase( unittest.TestCase ):
     ne( Option.absent, None )
     
     raises(
-      Option.Tried_to_access_nothing,
+      Option.OptionWasAbsent,
       lambda: Option.absent.option
     )
     
-  # ==============================================================================
   # ==============================================================================
   
   def test_something( self ):
@@ -47,7 +43,6 @@ class OptionTestCase( unittest.TestCase ):
     ne( five, Option.absent )
   
   # ==============================================================================
-  # ==============================================================================
   
   def test_nothing_2( self ):
     assert not Option.absent.exists
@@ -55,11 +50,10 @@ class OptionTestCase( unittest.TestCase ):
     assert Option.absent != None
    
     raises(
-      Option.Tried_to_access_nothing,
+      Option.OptionWasAbsent,
       lambda: Option.absent.option
     )
     
-  # ==============================================================================
   # ==============================================================================
   
   def test_something_2( self ):
@@ -75,28 +69,26 @@ class OptionTestCase( unittest.TestCase ):
     assert five != Option.absent
   
   # ==============================================================================
-  # ==============================================================================
   
   def test_invalid_input( self ):
     raises(
-      Option.Option_cannot_wrap_none,
+      Option.OptionCannotWrapNone,
       Option,
       None
     )
     
     raises(
-      Option.Option_cannot_wrap_nothing,
+      Option.OptionCannotWrapAbsent,
       Option,
       Option.absent
     )
       
     raises(
-      Option.Option_cannot_wrap_option,
+      Option.OptionCannotWrapOption,
       Option,
       Option( 5 ),
     )
     
-  # ==============================================================================
   # ==============================================================================
   
   def test_wrap( self ):
@@ -120,7 +112,6 @@ class OptionTestCase( unittest.TestCase ):
       Option.wrap( 5 ),
     )
   
-  # ==============================================================================
   # ==============================================================================
   
   def test_wrapper_fn( self ):

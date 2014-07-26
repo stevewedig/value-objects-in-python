@@ -11,10 +11,6 @@ from inspect import getargspec
 
 from once import once
 
-# ==============================================================================
-# ValueMixin
-# ==============================================================================
-
 class ValueMixin( object ):
 
   def __new__( klass, *positionalFields, **keywordFields ):

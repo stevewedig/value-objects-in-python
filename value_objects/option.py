@@ -1,76 +1,72 @@
 
 from decorate import wraps
 
-# ==============================================================================
-# ==============================================================================
-
 class Option( object ):
-  
-  class Option_cannot_wrap_none( Exception ): pass
-  
-  class Option_cannot_wrap_option( Exception ): pass
-  class Option_cannot_wrap_nothing( Option_cannot_wrap_option ): pass
-  
-  class Tried_to_access_nothing( Exception ): pass
-  
-  
+
+  class OptionCannotWrapNone( Exception ): pass
+
+  class OptionCannotWrapOption( Exception ): pass
+  class OptionCannotWrapAbsent( OptionCannotWrapOption ): pass
+
+  class OptionWasAbsent( Exception ): pass
+
   # ============================================================================
 
-  def __init__( s, inner ):
-    s._validate( inner )
-    s._inner = inner
-  
-  def _validate( s, inner ):
-    try:
-      nothing
-    except NameError:
-      return
-      
-    if inner is None:
-      raise s.Option_cannot_wrap_none()
-    
-    if isinstance( inner, Option ):   
-      if inner is nothing:
-        raise s.Option_cannot_wrap_nothing()
+  def __init__( s, item ):
+    s._validate( item )
+    s._item = item
+
+  def _validate( s, item ):
+
+    if item is None and absent_has_been_created:
+      raise s.OptionCannotWrapNone()
+
+    if isinstance( item, Option ):
+      if item is Option.absent:
+        raise s.OptionCannotWrapAbsent()
       else:
-        raise s.Option_cannot_wrap_option()
+        raise s.OptionCannotWrapOption()
 
   # ============================================================================
 
-  def __str__( s ):
+  # http://stackoverflow.com/questions/1307014/python-str-versus-unicode
+  def __str__( self ):
+    return unicode( self ).encode( 'utf-8' )
+
+  def __unicode__( s ):
     if s.exists:
-      return 'Option( %s )' % s._inner
+      return 'Option( %s )' % s._item
     else:
-      return 'nothing'
-      
+      return 'Option.absent'
+
   # ============================================================================
 
   def __hash__( s ):
-    return hash( s._inner )
-  
+    return hash( s._item )
+
   def __eq__( s, other ):
     if not isinstance( other, Option ):
       return False
-    
-    return s._inner == other._inner
+
+    return s._item == other._item
 
   def __ne__( s, other ):
     return not s.__eq__( other )
 
   # ============================================================================
-  
+
   @property
   def option( s ):
     if s.exists:
-      return s._inner
+      return s._item
     else:
-      raise s.Tried_to_access_nothing()
+      raise s.OptionWasAbsent()
 
   # ============================================================================
-    
+
   @property
   def exists( s ):
-    return s._inner is not None
+    return s._item is not None
 
   # ============================================================================
 
@@ -87,25 +83,26 @@ class Option( object ):
     if isinstance( x, Option ):
       return x
     elif x is None:
-      return nothing
+      return Option.absent
     else:
       return Option( x )
-    
+
   # ============================================================================
-  
+
   @classmethod
-  def wrapper( s, inner ):
-    
-    @wraps( inner )
+  def wrapper( s, item ):
+
+    @wraps( item )
     def outer( *a, **kw ):
-      val = inner( *a, **kw )
+      val = item( *a, **kw )
       return Option.wrap( val )
-    
+
     return outer
-  
+
 # ------------------------------------------------------------------------------
 
-nothing = Option( None )
+absent_has_been_created = False
 
-Option.absent = nothing
+Option.absent = Option( None )
 
+absent_has_been_created = True

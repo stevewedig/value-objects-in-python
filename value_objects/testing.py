@@ -1,8 +1,6 @@
 
 #  helpers for writing tests
 
-# ==============================================================================
-
 def raises( Expected, fn, *a, **kw ):
   
   if not issubclass( Expected, Exception ):

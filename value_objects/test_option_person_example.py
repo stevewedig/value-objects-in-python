@@ -4,8 +4,6 @@ import unittest
 from value_objects import once, Option
 from value_objects.testing import eq, ne, raises
 
-# ==============================================================================
-# ==============================================================================
 class Person( object ):
   def __init__(
     s,
