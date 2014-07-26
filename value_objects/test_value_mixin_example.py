@@ -1,8 +1,8 @@
 
 import unittest
 
-from value_objects.tdd import eq, ne
 from value_objects import ValueMixin, frozendict
+from value_objects.testing import eq, ne
 
 # ============================================================================
 # Path, Query, PathQuery

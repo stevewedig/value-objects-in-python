@@ -1,8 +1,8 @@
 
 import unittest
 
-from value_objects.tdd import eq
 from value_objects import ValueMixin
+from value_objects.testing import eq
 
 # ============================================================================
 # AbsPath <: Path

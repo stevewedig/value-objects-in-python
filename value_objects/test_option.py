@@ -1,8 +1,8 @@
 
 import unittest
 
-from tdd import eq, ne, raises
 from value_objects import Option
+from value_objects.testing import eq, ne, raises
 
 # ==============================================================================
 # ==============================================================================

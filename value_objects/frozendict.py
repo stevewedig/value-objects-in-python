@@ -7,13 +7,11 @@
 # https://github.com/slezica/python-frozendict
 
 from once import once
-
-def blocked( *a, **kw ):
-  raise AttributeError( 'A frozendict cannot be modified.' )
+from errors import not_mutable
 
 class frozendict( dict ):
   '''
-  An immutable and hashable dictionary
+  An immutable dictionary that behaves as a value
   '''
 
   def __hash__( s ):
@@ -30,13 +28,13 @@ class frozendict( dict ):
       sorted( items )
     )
 
-  __delitem__ = blocked
-  __setitem__ = blocked
-  clear = blocked
-  pop = blocked
-  popitem = blocked
-  setdefault = blocked
-  update = blocked
+  __delitem__ = not_mutable
+  __setitem__ = not_mutable
+  clear = not_mutable
+  pop = not_mutable
+  popitem = not_mutable
+  setdefault = not_mutable
+  update = not_mutable
 
   def __repr__( s ):
     return "frozendict(%s)" % dict.__repr__( s )

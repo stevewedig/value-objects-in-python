@@ -1,75 +1,143 @@
 
 import unittest
 
-from tdd import eq, ne, raises
-from value_objects import frozendict
+from value_objects import frozendict, NotMutable
+from value_objects.testing import raises, assert_equal_objects_and_strings, assert_unequal_objects_and_strings
 
 class FrozendictTestCase( unittest.TestCase ):
 
-  def test_identity( self ):
-    dict_0 = frozendict()
+  def test_frozendict_is_value( self ):
 
-    dict_1 = frozendict( 
-      x = 1,
-      y = frozendict( 
-        z = 2,
+    # ==================================
+    # empty
+    # ==================================
+
+    assert_equal_objects_and_strings( 
+      frozendict(),
+      frozendict()
+    )
+
+    assert_unequal_objects_and_strings( 
+      frozendict(),
+      frozendict( a = 2 )
+    )
+
+    # ==================================
+    # one key
+    # ==================================
+
+    assert_equal_objects_and_strings( 
+      frozendict( a = 1 ),
+      frozendict( a = 1 )
+    )
+
+    assert_unequal_objects_and_strings( 
+      frozendict( a = 1 ),
+      frozendict( a = 2 )
+    )
+
+    assert_unequal_objects_and_strings( 
+      frozendict( a = 1 ),
+      frozendict( a = 1, b = 2 )
+    )
+
+    # ==================================
+    # two keys
+    # ==================================
+
+    assert_equal_objects_and_strings( 
+      frozendict( 
+        a = 1,
+        b = 2
       ),
+      frozendict( 
+        b = 2,
+        a = 1
+      )
     )
 
-    dict_2 = frozendict( 
-      y = frozendict( 
-        z = 2,
-      ),
-      x = 1,
+    # ==================================
+    # non str keys
+    # ==================================
+
+    assert_equal_objects_and_strings( 
+      frozendict( {
+        1: 2,
+        3: 4,
+      } ),
+      frozendict( {
+        1: 2,
+        3: 4,
+      } )
     )
 
-    assert dict_0 is not dict_2
-    assert dict_1 is not dict_2
+    # ==================================
+    # mix and match different kinds of values
+    # ==================================
 
-    ne( dict_0, dict_1 )
-    eq( dict_1, dict_2 )
-
-    ne( 
-      hash( dict_0 ),
-      hash( dict_1 ),
+    assert_equal_objects_and_strings( 
+      tuple( [
+        'x',
+        frozenset( [
+          'y',
+          frozendict( 
+              boolean = True,
+              integer = 1,
+              real = 1.5,
+              byte = 'byte',
+              unicode = 'unicode',
+          )
+        ] )
+      ] ),
+      tuple( [
+        'x',
+        frozenset( [
+          'y',
+          frozendict( 
+              boolean = True,
+              integer = 1,
+              real = 1.5,
+              byte = 'byte',
+              unicode = 'unicode',
+          )
+        ] )
+      ] )
     )
 
-    eq( 
-      hash( dict_1 ),
-      hash( dict_2 ),
+    assert_unequal_objects_and_strings( 
+      tuple( [
+        'x',
+        frozenset( [
+          'y',
+          frozendict( 
+              boolean = True,
+              integer = 1,
+              real = 1.5,
+              byte = 'byte',
+              unicode = 'unicode',
+          )
+        ] )
+      ] ),
+      tuple( [
+        'x',
+        frozenset( [
+          'y',
+          frozendict( 
+              boolean = False,  # only difference
+              integer = 1,
+              real = 1.5,
+              byte = 'byte',
+              unicode = 'unicode',
+          )
+        ] )
+      ] )
     )
 
-    verify_dict = {
-      dict_1 : 'verify'
-    }
-    assert dict_0 not in verify_dict
-    eq( 'verify', verify_dict[ dict_1 ] )
-    eq( 'verify', verify_dict[ dict_2 ] )
-
-    verify_set = set( [ dict_1, dict_2 ] )
-
-    eq( 1, len( verify_set ) )
-    assert dict_0 not in verify_set
-    assert dict_1 in verify_set
-    assert dict_2 in verify_set
-
-    verify_set.add( dict_0 )
-    eq( 2, len( verify_set ) )
+  # ============================================================================
 
   def test_immutable( self ):
-    d = frozendict( { 1 : 1 } )
 
-    def update():
-      d.update( {} )
-
-    def setitem():
-      d[ 1 ] = 2
-
-    def pop():
-      d.pop()
-
-    def popitem():
-      d.popitem()
+    d = frozendict()
 
     fns = [
       lambda: d.update( {} ),
@@ -82,5 +150,5 @@ class FrozendictTestCase( unittest.TestCase ):
     ]
 
     for fn in fns:
-      raises( AttributeError, fn )
+      raises( NotMutable, fn )
 
