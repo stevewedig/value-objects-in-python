@@ -14,19 +14,19 @@ This library provides helpers for implementing value objects in Python. The libr
 
 [Vladimir Keleshev](https://github.com/halst) has an alternative Python library for [value objects](https://github.com/halst/value) that makes some slightly different design decisions. My library is a combination of techniques I've used before and Vladimir's choice for syntax (using `__init__` to indicate field name, order, and default values).
 
-### Pip Install
+### Usage via Pip Install
 
 The easiest way to use this library is to use [Pip](http://en.wikipedia.org/wiki/Pip_(package_manager)):
 
     pip install value_objects
 
-### Copying Library Files
+### Usage via Copying Library Files
 
 Alternatively you can just copy the library directory into your own codebase.
 
 ## Other Blog Posts
 
-In addition to this project's blog post ([Value Objects in Java & Python](http://stevewedig.com)), here are others that may interest you:
+In addition to this project's blog post ([Value Objects in Java & Python](http://stevewedig.com)), here are others that may be of interest:
 
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 * [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
