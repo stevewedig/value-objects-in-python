@@ -26,6 +26,7 @@ sudo apt-get -y install python2.6
 sudo apt-get -y install python2.7
 sudo apt-get -y install python3.2
 sudo apt-get -y install python3.3
+sudo apt-get -y install python3.4
 
 # pip
 sudo apt-get -y install python-pip
