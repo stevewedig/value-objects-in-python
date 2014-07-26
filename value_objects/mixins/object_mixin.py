@@ -1,4 +1,5 @@
 
+import sys
 from inspect import getargspec
 
 from value_objects.util.zip import izip
@@ -55,8 +56,12 @@ class ObjectMixin( object ):
   # ====================================
 
   # http://stackoverflow.com/questions/1307014/python-str-versus-unicode
-  def __str__( self ):
-    return unicode( self ).encode( 'utf-8' )
+  if sys.version_info[0] >= 3: # Python 3
+      def __str__(self):
+          return self.__unicode__()
+  else:  # Python 2
+      def __str__(self):
+          return self.__unicode__().encode('utf8')
 
   def __repr__( self ):
     return self.object_helper.class_and_state_repr
