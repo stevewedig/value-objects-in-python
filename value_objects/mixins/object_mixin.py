@@ -78,7 +78,7 @@ class ObjectMixin( object ):
 def initialize_class( klass ):
 
   # only need to the initialize_class once
-  # checking .class_that_was_initialzed enables init to happen for subclasses
+  # checking .class_that_was_initialzed enables initialize_class to happen for subclasses
   try:
     if klass == klass.class_that_was_initialzed:
       return
