@@ -33,7 +33,7 @@ Alternatively you can just copy the library code directory into your own codebas
 
 ### Other Blog Posts
 
-In addition to this project's blog post ([Value Objects in Java & Python](http://stevewedig.com)), here are others that may (or may not) be of interest:
+In addition to this project's blog post ([Value Objects in Java & Python](http://stevewedig.com)), you may (or may not) also be interested in...
 
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 * [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
