@@ -25,7 +25,7 @@ Alternatively you can just copy the library code directory into your own codebas
 
 ### Running Tox tests in Vagrant
 
-[Vagrant](http://www.vagrantup.com/) is a great way to run sandboxed experiments on your dev machine. I used Vagrant plus [Tox](https://testrun.org/tox/latest/) to quickly test this library in Python 2.6, 2.7, 3.1 - 3.4. The three scripts I used are included in this project. Aftering going through the Vagrant tutorial, you should be able to try them out:
+[Vagrant](http://www.vagrantup.com/) is a great way to run sandboxed experiments on your dev machine. I used Vagrant plus [Tox](https://testrun.org/tox/latest/) to quickly test this library in Python 2.x and 3.x. The three scripts I used are included in this project. Aftering going through the quick Vagrant tutorial, you'll be able to try them out:
 
 * Setup the VM on your dev machine: [1_enter_ubuntu_vm.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/1_enter_ubuntu_vm.sh)
 * Download and run the provision and test script inside the VM: [2_run_inside_ubuntu_vm.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/2_run_inside_ubuntu_vm.sh)
