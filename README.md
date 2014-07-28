@@ -11,6 +11,8 @@ This library makes it easy to implement value objects in Python. The library's r
 * **GitHub Repo**: https://github.com/stevewedig/value-objects-in-python
 * **License**: This project is in the public domain via [Unlicense](http://unlicense.org).
 
+### Alternative library
+
 [Vladimir Keleshev](https://github.com/halst) has an alternative Python library for [value objects](https://github.com/halst/value) that makes some different design decisions. My library is a combination of techniques I've used before and Vladimir's technique of using `__init__` to indicate field name, order, and default values.
 
 ### Installation via Pip
@@ -31,7 +33,7 @@ Alternatively you can just copy the library code directory into your own codebas
 1. Download and run the provision and test script inside the VM: [2_run_inside_ubuntu_vm.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/2_run_inside_ubuntu_vm.sh)
 1. The provision and test script: [3_provision_and_test.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/3_provision_and_test.sh)
 
-### Other Blog Posts
+### Other blog posts
 
 In addition to this project's blog post ([Value Objects in Java & Python](http://stevewedig.com)), you may also be interested in these posts of mine:
 
