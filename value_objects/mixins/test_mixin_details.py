@@ -2,7 +2,11 @@
 import unittest
 
 from value_objects import ValueMixin, EntityMixin
-from value_objects.util.testing import eq
+from value_objects.util.testing import eq, assert_unequal_objects_and_strings
+
+# ============================================================================
+# cache/hash test setup
+# ============================================================================
 
 class HashCounter( object ):
   
@@ -20,6 +24,7 @@ class ValueWithCounter( ValueMixin ):
 class EntityWithCounter( EntityMixin ):
   def __init__( self, counter ):
     pass
+
 
 # ============================================================================
 
@@ -55,3 +60,18 @@ class MixinDetailsTestCase( unittest.TestCase ):
     # nested object shouldn't be hashed
     hash( entity )
     eq( 0, entity.counter.hash_count )
+
+  def test_behavior_checking( self ):
+        
+    class A( ValueMixin ):
+      def __init__( self, name ):
+        pass
+    
+    class B( ValueMixin ):
+      def __init__( self, name ):
+        pass
+        
+    a = A( "val" )
+    b = B( "val" )
+    
+    assert_unequal_objects_and_strings( a, b )
