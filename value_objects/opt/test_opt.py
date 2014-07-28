@@ -6,7 +6,7 @@ from value_objects.util.testing import eq, ne, raises, assert_equal_objects_and_
 
 class OptTestCase( unittest.TestCase ):
 
-  def test_Opt_is_value( self ):
+  def test_opt_is_value( self ):
 
     assert_equal_objects_and_strings( 
       Opt( 1 ),

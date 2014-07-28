@@ -17,7 +17,7 @@ class Parent( ValueMixin ):
     return self.a * 2
 
 class Child( Parent ):
-  def __init__( self, a, b, c = 99 ): # these field_names should be a superset
+  def __init__( self, a, b, c = 99 ):  # these field_names should be a superset
     pass
 
   @property
@@ -29,9 +29,9 @@ class Child( Parent ):
 # make sure inheritance works (not that I really ever use it)
 # ============================================================================
 
-class TestValueMixinInheritance( unittest.TestCase ):
+class ValueMixinInheritanceTestCase( unittest.TestCase ):
 
-  def testValueMixinInheritance( self ):
+  def test_value_mixin_inheritance( self ):
 
     parent = Parent( 1 )
     eq( 1, parent.a )
@@ -43,7 +43,7 @@ class TestValueMixinInheritance( unittest.TestCase ):
     eq( 2, parent.double_a )
     eq( 64325, parent.c )
 
-    raises(
+    raises( 
       TypeError,
       lambda: Parent( 1, 2, 3 ),
     )
@@ -61,9 +61,8 @@ class TestValueMixinInheritance( unittest.TestCase ):
     eq( 10, child.b )
     eq( 30, child.triple_b )
     eq( 4562, child.c )
-    
+
     # internal details
     eq( ( 'a', 'c' ), parent.field_names )
     eq( ( 'a', 'b', 'c' ), child.field_names )
-    
-    
+

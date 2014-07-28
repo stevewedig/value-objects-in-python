@@ -26,7 +26,7 @@ class Feed( ValueMixin ):
 
 class ValueMixinTestCase( unittest.TestCase ):
 
-  def testValueMixinExample( self ):
+  def test_value_mixin_example( self ):
 
     # same images
     image1 = Image( "http://image.com", Opt( 20 ), Opt( 30 ) )

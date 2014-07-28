@@ -6,7 +6,7 @@ from value_objects.util.testing import eq
 
 class OnceTestCase( unittest.TestCase ):
 
-  def test_example( self ):
+  def test_once_example( self ):
     '''
     make sure properties decorated with @once are only computed once
     '''

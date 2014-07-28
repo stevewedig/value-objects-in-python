@@ -18,7 +18,7 @@ class Person( EntityMixin ):
 
 class EntityMixinTestCase( unittest.TestCase ):
 
-  def testEntityMixinExample( self ):
+  def test_entity_mixin_example( self ):
     
     bob1 = Person( name = 'bob', age = 40 )
     bob2 = Person( name = 'bob', age = 40 )

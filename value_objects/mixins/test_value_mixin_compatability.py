@@ -15,7 +15,7 @@ def fixture( init ):
         __init__ = init
     return Option
 
-class ValueMixinTestCase( unittest.TestCase ):
+class CompatabilityTestCase( unittest.TestCase ):
 
   def test_primitive_value( self ):
       Option = fixture( lambda self: None )

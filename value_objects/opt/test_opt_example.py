@@ -34,7 +34,7 @@ class Person( object ):
     
 # ==============================================================================
 
-class OptTestCase( unittest.TestCase ):
+class OptExampleTestCase( unittest.TestCase ):
   
   def test_person_example( self ):
     steve = Person(
