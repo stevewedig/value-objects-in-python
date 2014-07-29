@@ -12,7 +12,7 @@ which add-apt-repository # verify
 # sudo apt-get -y install emacs vim
 
 # git
-# - use ppa to get a recent version, older versions may not work with Jenkins
+# - use ppa to get a recent version
 # - http://askubuntu.com/questions/279172/upgrade-git-on-ubuntu-10-04-lucid-lynx
 sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt-get update

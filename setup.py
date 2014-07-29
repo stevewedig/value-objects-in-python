@@ -1,9 +1,11 @@
 from distutils.core import setup
 
 # http://guide.python-distribute.org/creation.html
+# login: python setup.py register
+# update: python setup.py sdist upload
 setup( 
     name = 'value_objects',
-    version = '2.0.1',
+    version = '2.0.2',
     author = 'Steve Wedig',
     packages = [
       'value_objects', 
