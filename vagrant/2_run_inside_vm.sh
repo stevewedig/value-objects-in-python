@@ -11,9 +11,9 @@ chmod +x 3_provision.sh
 
 # checkout code
 git clone https://github.com/stevewedig/value-objects-in-python.git
+cd value-objects-in-python
 
 # run tests via tox (tox apparently does something requiring sudo)
-cd value-objects-in-python
 sudo tox
 
 # next steps...
