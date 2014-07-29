@@ -5,7 +5,7 @@ from distutils.core import setup
 # update: python setup.py sdist upload
 setup( 
     name = 'value_objects',
-    version = '2.0.2',
+    version = '2.0.3',
     author = 'Steve Wedig',
     packages = [
       'value_objects', 
