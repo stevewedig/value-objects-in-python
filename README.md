@@ -31,7 +31,7 @@ Alternatively you can just copy the library code directory into your own codebas
 
 1. Setup the VM on your dev machine: [1_enter_vm.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/1_enter_vm.sh)
 1. Provision and test inside the VM: [2_run_inside_vm.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/2_run_inside_vm.sh)
-1. Provision: [3_provision.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/3_provision.sh)
+1. The provision script: [3_provision.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/3_provision.sh)
 
 
 ### Other blog posts
