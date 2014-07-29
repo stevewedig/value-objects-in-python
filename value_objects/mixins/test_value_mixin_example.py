@@ -78,3 +78,12 @@ class ValueMixinTestCase( unittest.TestCase ):
     # feed without articles
     assert_unequal_objects_and_strings( feed1, Feed( "http://feed.com", "My Feed", tuple() ) )
 
+  def test_comparison_to_non_value_objects( self ):
+
+    image = Image( "http://image.com" )
+    
+    assert_unequal_objects_and_strings( image, 1 )
+    
+    assert_unequal_objects_and_strings( image, None )
+    
+    
