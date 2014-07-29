@@ -34,9 +34,3 @@ sudo apt-get -y install python-pip
 # tox
 sudo pip install tox
 
-# checkout code and run tests via tox
-# - tox apparently does something requiring sudo
-git clone https://github.com/stevewedig/value-objects-in-python.git
-cd value-objects-in-python
-sudo tox
-
