@@ -29,8 +29,8 @@ Alternatively you can just copy the library code directory into your own codebas
 
 [Vagrant](http://www.vagrantup.com/) (with [VirtualBox](http://en.wikipedia.org/wiki/VirtualBox) is a great way to run sandboxed experiments on your dev machine. I use Vagrant plus [Tox](https://testrun.org/tox/) to run this library's tests in Python 2.x and 3.x without affecting my dev machine. The three scripts I use are included in this project. After going through the quick Vagrant tutorial you'll be ready to try them out:
 
-1. Setup the VM on your dev machine: [1_enter_ubuntu_vm.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/1_enter_ubuntu_vm.sh)
-1. Provision and test inside the VM: [2_run_inside_ubuntu_vm.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/2_run_inside_ubuntu_vm.sh)
+1. Setup the VM on your dev machine: [1_enter_vm.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/1_enter_vm.sh)
+1. Provision and test inside the VM: [2_run_inside_vm.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/2_run_inside_vm.sh)
 1. Provision: [3_provision.sh](https://github.com/stevewedig/value-objects-in-python/blob/master/vagrant/3_provision.sh)
 
 
