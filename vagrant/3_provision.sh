@@ -9,7 +9,8 @@ sudo apt-get -y install python-software-properties
 which add-apt-repository # verify
 
 # optionally install a text editor
-# sudo apt-get -y install emacs vim
+# sudo apt-get -y install emacs
+# sudo apt-get -y install vim
 
 # git
 # - use ppa to get a recent version
