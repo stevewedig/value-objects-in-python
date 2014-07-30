@@ -24,6 +24,7 @@ sudo apt-add-repository -y ppa:fkrull/deadsnakes
 sudo apt-get update
 sudo apt-get -y install python2.6
 sudo apt-get -y install python2.7
+sudo apt-get -y install python3.1
 sudo apt-get -y install python3.2
 sudo apt-get -y install python3.3
 sudo apt-get -y install python3.4
