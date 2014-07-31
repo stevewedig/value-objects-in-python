@@ -109,7 +109,8 @@ class MixinDetailsTestCase( unittest.TestCase ):
 
   # ====================================
   
-  def test_values_work_with_entities( self ):
+  # see the blog post for why I don't personally do this
+  def test_values_can_contain_entities( self ):
     
     class C( ValueMixin ):
       def __init__( self, myFlag, myEntity ):

@@ -1,5 +1,5 @@
 
-v2.0.4, July 30rd 2014 -- due to 3.4 failure, changed frozendict to use frozenset of items
+v2.0.4, July 30rd 2014 -- Due to 3.4 failure, changed frozendict to use frozenset of items.
 v2.0.3, July 29rd 2014 -- isinstance check on object_helper attr.
 v2.0.2, July 28rd 2014 -- More tests.
 v2.0.1, July 26rd 2014 -- Fixed setup.py, which fixed the distribution.
