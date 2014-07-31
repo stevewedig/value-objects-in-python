@@ -1,31 +1,37 @@
 
-# frozendict recipes:
 # http://legacy.python.org/dev/peps/pep-0416/
 # http://code.activestate.com/recipes/414283-frozen-dictionaries/
-# from http://code.activestate.com/recipes/414283/
 # https://github.com/slezica/python-frozendict
 
-from value_objects.util.once import once
 from value_objects.util.not_mutable import not_mutable
+from value_objects.util.once import once
+
 
 class frozendict( dict ):
   '''
   An immutable dictionary that behaves as a value
   '''
 
-  def __hash__( s ):
-    return hash( s.sorted_items )
+  def __eq__( self, other ):
+    if not isinstance( other, frozendict ):
+      return False
+    
+    return self.item_set == other.item_set
+  
+  def __ne__( self, other ):
+    return not self.__eq__( other )
+
+  def __hash__( self ):
+    return hash( self.item_set )
 
   @once
-  def sorted_items( s ):
+  def item_set( self ):
     try:
-      items = s.iteritems()
+      items = self.iteritems()
     except AttributeError:
-      items = s.items()
+      items = self.items()
 
-    return tuple( 
-      sorted( items )
-    )
+    return frozenset( items )
 
   __delitem__ = not_mutable
   __setitem__ = not_mutable
@@ -35,6 +41,6 @@ class frozendict( dict ):
   setdefault = not_mutable
   update = not_mutable
 
-  def __repr__( s ):
-    return "frozendict(%s)" % dict.__repr__( s )
+  def __repr__( self ):
+    return "frozendict(%s)" % dict.__repr__( self )
 
