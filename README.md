@@ -6,7 +6,7 @@ Value Objects in Python
 
 (GitHub has a rendered version of this readme: https://github.com/stevewedig/value-objects-in-python/)
 
-This library makes it easy to implement value objects in Python. The library's rationale and usage instructions can be found in this blog post: [Value Objects in Java & Python](http://stevewedig.com).
+This library makes it easy to implement value objects in Python. The library's rationale and usage instructions can be found in this blog post: [Value Objects in Java & Python](http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/).
 
 * **GitHub Repo**: https://github.com/stevewedig/value-objects-in-python
 * **License**: This project is in the public domain via [Unlicense](http://unlicense.org).
@@ -36,7 +36,7 @@ Alternatively you can just copy the library code directory into your own codebas
 
 ### Other blog posts
 
-In addition to this project's blog post ([Value Objects in Java & Python](http://stevewedig.com)), you may also be interested in these posts of mine:
+In addition to this project's blog post ([Value Objects in Java & Python](http://stevewedig.com/2014/07/31/value-objects-in-java-and-python/)), you may also be interested in these posts of mine:
 
 * [A Software Developer's Reading List](http://stevewedig.com/2014/02/03/software-developers-reading-list/)
 * [Why & How I Write Java](http://stevewedig.com/2014/02/17/why-and-how-i-write-java/)
