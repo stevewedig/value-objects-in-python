@@ -37,24 +37,29 @@ class Person( object ):
 class OptExampleTestCase( unittest.TestCase ):
   
   def test_person_example( self ):
-    steve = Person(
-      first_name = 'Steve',
-      last_name = 'Wedig',
+    john = Person(
+      first_name = 'John',
+      last_name = 'Doe',
       middle_name = 'Michael',
       social_security = 1234,
     )
   
-    assert steve.middle_name.is_present
-    eq( 'Michael', steve.middle_name.opt )
+    assert john.middle_name.is_present
+    assert not john.middle_name.is_absent
+    eq( 'Michael', john.middle_name.opt )
     
-    assert steve.social_security.is_present
-    eq( 1234, steve.social_security.opt )
+    assert john.social_security.is_present
+    assert not john.social_security.is_absent
+    eq( 1234, john.social_security.opt )
     
-    dan = Person(
-      first_name = 'Dan',
-      last_name = 'Soudek',
+    alice = Person(
+      first_name = 'Alice',
+      last_name = 'Smith',
     )
   
-    assert not dan.middle_name.is_present
-    assert not dan.social_security.is_present
+    assert not alice.middle_name.is_present
+    assert alice.middle_name.is_absent
+
+    assert not alice.social_security.is_present
+    assert alice.social_security.is_absent
   
