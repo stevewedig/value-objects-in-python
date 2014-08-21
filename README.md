@@ -1,6 +1,3 @@
-
-(This is a work in progress: the blog post isn't published.)
-
 Value Objects in Python
 =======================
 
